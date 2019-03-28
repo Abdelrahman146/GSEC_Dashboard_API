@@ -6,6 +6,10 @@ import { Request, Response } from 'express';
 
 class ProjectsController {
 
+    constructor() {
+        console.log("ProjectsController Initiated");
+    }
+
     // load all projects
     public async loadProjects( req: Request, res: Response) {
         try {
@@ -21,11 +25,11 @@ class ProjectsController {
 
 
     //retrieve all projects
-    public async getAllProjects( req: Request, res: Response) {
+    public getAllProjects( req: Request, res: Response) {
         try {
-            let projects: Project[] = await projectsLoader.getAllProjects();
+            let projects: any = projectsLoader.getAllProjects();
             res.json(projects);
-            console.log("projects sent");
+            console.log(`projects sent ${JSON.stringify(projectsLoader.getAllProjects())}`);
         }catch(err) {
             res.send(`an error occured: ${err}`);
             console.log(`an error occured: ${err}`);

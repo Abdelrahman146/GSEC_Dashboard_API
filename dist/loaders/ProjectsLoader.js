@@ -8,24 +8,31 @@ var request_promise_1 = __importDefault(require("request-promise"));
 //import query from 'array-query';
 var ProjectsLoader = /** @class */ (function () {
     function ProjectsLoader() {
+        // private projectsUrlOptions = {
+        //     method: 'POST',
+        //     uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
+        //     body: {
+        //         some: 'payload'
+        //     },
+        //     json: true
+        // };
         this.projectsUrlOptions = {
-            uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
+            uri: 'https://reqres.in/api/users',
             json: true
         };
-        this.projects = this.fetchProjects();
+        this.projects = [];
+        console.log("ProjectsLoader initiated");
+        this.loadProjects();
     }
-    ProjectsLoader.prototype.fetchProjects = function () {
-        var projects;
+    ProjectsLoader.prototype.loadProjects = function () {
+        var that = this;
         request_promise_1.default(this.projectsUrlOptions).then(function (p) {
-            console.log("successfully retrieved " + p.length + " projects");
-            projects = p;
-            return projects;
+            console.log("successfully retrieved " + p.data.length + " projects");
+            that.projects = p.data;
         }).catch(function (err) {
             console.log("an error occured while retrieving the projects from API... " + err);
         });
-    };
-    ProjectsLoader.prototype.loadProjects = function () {
-        this.projects = this.fetchProjects();
+        console.log("projects: " + this.projects);
     };
     // get all projects from the object
     ProjectsLoader.prototype.getAllProjects = function () {

@@ -8,6 +8,7 @@ var ProjectsController_1 = __importDefault(require("../controllers/ProjectsContr
 var Routes = /** @class */ (function () {
     function Routes() {
         this.projectsController = new ProjectsController_1.default();
+        console.log("Routes initiated");
     }
     Routes.prototype.routes = function (app) {
         // get all projects

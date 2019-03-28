@@ -6,7 +6,7 @@ import rp from 'request-promise';
 
 class ProjectsLoader {
 
-    private projects: Project[];
+    private projects: any[];
     private projectsUrlOptions = {
         method: 'POST',
         uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
@@ -15,29 +15,30 @@ class ProjectsLoader {
         },
         json: true
     };
+    // private projectsUrlOptions = {
+    //     uri: 'https://reqres.in/api/users',
+    //     json: true
+    // };
 
 
     constructor() {
-        this.projects = this.fetchProjects();
+        this.projects = [];
+        console.log("ProjectsLoader initiated");
+        this.loadProjects();
     }
 
-    public fetchProjects(): any {
-        let projects: Project[];
+    public loadProjects() {
+        let that = this
         rp(this.projectsUrlOptions).then(function(p) {
-            console.log(`successfully retrieved ${p.length} projects`);
-            projects = p;
-            return projects;
+            console.log(`successfully retrieved ${p.data.length} projects`);
+            that.projects = p.data;
         }).catch(function(err) {
             console.log(`an error occured while retrieving the projects from API... ${err}`);
-        });  
-    }
-
-    public loadProjects(): void {
-        this.projects = this.fetchProjects();
+        }); 
     }
 
     // get all projects from the object
-    public getAllProjects(): Project[] {
+    public getAllProjects(): any {
         return this.projects;
     }
 

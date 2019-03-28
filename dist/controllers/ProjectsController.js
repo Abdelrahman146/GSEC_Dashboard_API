@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ProjectsLoader_1 = __importDefault(require("../loaders/ProjectsLoader"));
 var ProjectsController = /** @class */ (function () {
     function ProjectsController() {
+        console.log("ProjectsController Initiated");
     }
     // load all projects
     ProjectsController.prototype.loadProjects = function (req, res) {
@@ -69,27 +70,15 @@ var ProjectsController = /** @class */ (function () {
     };
     //retrieve all projects
     ProjectsController.prototype.getAllProjects = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var projects, err_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, ProjectsLoader_1.default.getAllProjects()];
-                    case 1:
-                        projects = _a.sent();
-                        res.json(projects);
-                        console.log("projects sent");
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_2 = _a.sent();
-                        res.send("an error occured: " + err_2);
-                        console.log("an error occured: " + err_2);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
+        try {
+            var projects = ProjectsLoader_1.default.getAllProjects();
+            res.json(projects);
+            console.log("projects sent " + JSON.stringify(ProjectsLoader_1.default.getAllProjects()));
+        }
+        catch (err) {
+            res.send("an error occured: " + err);
+            console.log("an error occured: " + err);
+        }
     };
     return ProjectsController;
 }());

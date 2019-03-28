@@ -6,6 +6,9 @@ export class Routes {
 
     private projectsController: ProjectsController = new ProjectsController();
 
+    public constructor() {
+        console.log("Routes initiated");
+    }
     public routes(app: any): void {
         // get all projects
         app.route('/projects/load').get(this.projectsController.loadProjects);
