@@ -7,17 +7,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var request_promise_1 = __importDefault(require("request-promise"));
 //import query from 'array-query';
 var ProjectsLoader = /** @class */ (function () {
+    // private projectsUrlOptions = {
+    //     uri: 'https://reqres.in/api/users',
+    //     json: true
+    // };
     function ProjectsLoader() {
-        // private projectsUrlOptions = {
-        //     method: 'POST',
-        //     uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
-        //     body: {
-        //         some: 'payload'
-        //     },
-        //     json: true
-        // };
         this.projectsUrlOptions = {
-            uri: 'https://reqres.in/api/users',
+            method: 'POST',
+            uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
+            body: {
+                some: 'payload'
+            },
             json: true
         };
         this.projects = [];
@@ -32,7 +32,6 @@ var ProjectsLoader = /** @class */ (function () {
         }).catch(function (err) {
             console.log("an error occured while retrieving the projects from API... " + err);
         });
-        console.log("projects: " + this.projects);
     };
     // get all projects from the object
     ProjectsLoader.prototype.getAllProjects = function () {
