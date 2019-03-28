@@ -16,7 +16,16 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
+    "@types/body-parser": "^1.17.0",
     "@types/express": "^4.16.1",
-    "express": "^4.16.4"
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
+    "arcgis-js-api": "^4.10.1",
+    "array-query": "^0.1.2",
+    "express": "^4.16.4",
+    "https": "^1.0.0",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }
