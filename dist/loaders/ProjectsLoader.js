@@ -13,7 +13,6 @@ var ProjectsLoader = /** @class */ (function () {
             json: true
         };
         this.projects = this.fetchProjects();
-        //his.projects = this.fetchProjects();
     }
     ProjectsLoader.prototype.fetchProjects = function () {
         var projects;
@@ -22,7 +21,7 @@ var ProjectsLoader = /** @class */ (function () {
             projects = p;
             return projects;
         }).catch(function (err) {
-            console.log("an error occured while retrieving the projects from API...");
+            console.log("an error occured while retrieving the projects from API... " + err);
         });
     };
     ProjectsLoader.prototype.loadProjects = function () {

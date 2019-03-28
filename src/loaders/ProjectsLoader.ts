@@ -8,7 +8,11 @@ class ProjectsLoader {
 
     private projects: Project[];
     private projectsUrlOptions = {
+        method: 'POST',
         uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
+        body: {
+            some: 'payload'
+        },
         json: true
     };
 
