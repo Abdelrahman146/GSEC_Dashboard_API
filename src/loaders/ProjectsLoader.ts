@@ -15,7 +15,6 @@ class ProjectsLoader {
 
     constructor() {
         this.projects = this.fetchProjects();
-        //his.projects = this.fetchProjects();
     }
 
     public fetchProjects(): any {
@@ -25,7 +24,7 @@ class ProjectsLoader {
             projects = p;
             return projects;
         }).catch(function(err) {
-            console.log(`an error occured while retrieving the projects from API...`);
+            console.log(`an error occured while retrieving the projects from API... ${err}`);
         });  
     }
 
