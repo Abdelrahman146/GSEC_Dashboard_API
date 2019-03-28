@@ -13,11 +13,7 @@ var ProjectsLoader = /** @class */ (function () {
     // };
     function ProjectsLoader() {
         this.projectsUrlOptions = {
-            method: 'POST',
             uri: 'https://almeydan.ecouncil.ae/almeydanapi/api/dashboard',
-            body: {
-                some: 'payload'
-            },
             json: true
         };
         this.projects = [];
