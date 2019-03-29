@@ -11,7 +11,7 @@ var Routes = /** @class */ (function () {
         console.log("Routes initiated");
     }
     Routes.prototype.routes = function (app) {
-        // get all projects
+        // reload all projects
         app.route('/projects/load').get(this.projectsController.loadProjects);
         // get all projects
         app.route('/projects').get(this.projectsController.getAllProjects);
