@@ -1,5 +1,5 @@
 {
-  "name": "GSEC_Dashboard_API",
+  "name": "gsec_dashboard_api",
   "version": "1.0.0",
   "description": "an API to make the data up and ready for the GSEC dashboard",
   "main": "./build/server.js",
@@ -26,11 +26,13 @@
     "@types/express": "^4.16.1",
     "@types/request": "^2.48.1",
     "@types/request-promise": "^4.1.42",
+    "esri-loader": "^2.9.0",
     "express": "^4.16.4",
+    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-form-data": "^2.0.0",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "isomorphic-fetch": "^2.2.1",
-    "isomorphic-form-data": "^2.0.0"
+    "ts-querying": "^1.0.4"
   }
 }

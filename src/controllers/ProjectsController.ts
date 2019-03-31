@@ -36,20 +36,6 @@ class ProjectsController {
         }
     }
 
-
-    // //retrieve all projects
-    // public async getProject( req: Request, res: Response) {
-    //     try {
-    //         let projectId: string = req.params.id;
-    //         let project: Project = await projectsLoader.getProjectById(projectId);
-    //         res.json(project);
-    //         console.log("projects sent");
-    //     }catch(err) {
-    //         res.send(`an error occured: ${err}`);
-    //         console.log(`an error occured: ${err}`);
-    //     }
-    // }
-
 }
 
 export default ProjectsController;
