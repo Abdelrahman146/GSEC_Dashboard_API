@@ -107,7 +107,7 @@ var ProjectsLoader = /** @class */ (function () {
                             if (ymax < point[1]) {
                                 ymax = point[1];
                             }
-                            if (ymin < point[1]) {
+                            if (ymin > point[1]) {
                                 ymin = point[1];
                             }
                         });
