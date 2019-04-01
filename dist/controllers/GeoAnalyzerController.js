@@ -1,5 +1,5 @@
 "use strict";
-// /src/controllers/geoAnalyzer/ElectricityController.ts
+// /src/controllers/geoAnalyzer/GeoAnalyzerController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -55,7 +55,7 @@ var PublicSchoolsLoader_1 = __importDefault(require("../loaders/geoAnalyzer/Publ
 var TrafficDensityLoader_1 = __importDefault(require("../loaders/geoAnalyzer/TrafficDensityLoader"));
 var GeoAnalyzerController = /** @class */ (function () {
     function GeoAnalyzerController() {
-        console.log("GeoAnalyzerController: Initiated");
+        console.log("GeoAnalyzerController: has started");
     }
     // reload Demographic object
     GeoAnalyzerController.prototype.loadDemographics = function (req, res) {
@@ -176,7 +176,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = WaterLoader_1.default.getWaterObject();
             res.send(result);
-            console.log("GeoAnalyzerController: total water consumption sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: total water consumption sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -212,7 +212,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = ElectricityLoader_1.default.getElectricityObject();
             res.send(result);
-            console.log("GeoAnalyzerController: total electricity consumption sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: total electricity consumption sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -248,7 +248,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = HospitalsLoader_1.default.getAllHospitals();
             res.send(result);
-            console.log("GeoAnalyzerController: hospitals sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: hospitals sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -284,7 +284,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = ClinicsLoader_1.default.getAllClinics();
             res.send(result);
-            console.log("GeoAnalyzerController: clinics sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: clinics sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -320,7 +320,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = PoliceStationsLoader_1.default.getAllPoliceStations();
             res.send(result);
-            console.log("GeoAnalyzerController: PoliceStations sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: PoliceStations sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: n error occured: " + err);
@@ -356,7 +356,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = CivilDefenceStationsLoader_1.default.getAllCivilDefenceStations();
             res.send(result);
-            console.log("GeoAnalyzerController: CivilDefence Stations sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: CivilDefence Stations sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -392,7 +392,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = AmbulanceStationsLoader_1.default.getAllAmbulanceStations();
             res.send(result);
-            console.log("GeoAnalyzerController: Ambulance Stations sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: Ambulance Stations sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -428,7 +428,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = PrivateSchoolsLoader_1.default.getAllPrivateSchools();
             res.send(result);
-            console.log("GeoAnalyzerController: PrivateSchools sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: PrivateSchools sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -464,7 +464,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = PublicSchoolsLoader_1.default.getAllPublicSchools();
             res.send(result);
-            console.log("GeoAnalyzerController: PublicSchools sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: PublicSchools sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -500,7 +500,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = PlacesOfWorshipLoader_1.default.getAllPlacesOfWorship();
             res.send(result);
-            console.log("GeoAnalyzerController: PlacesOfWorship sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: PlacesOfWorship sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -536,7 +536,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = HotelsLoader_1.default.getAllHotels();
             res.send(result);
-            console.log("GeoAnalyzerController: Hotels sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: Hotels sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -572,7 +572,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = HousesLoader_1.default.getAllHouses();
             res.send(result);
-            console.log("GeoAnalyzerController: Houses sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: Houses sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);
@@ -608,7 +608,7 @@ var GeoAnalyzerController = /** @class */ (function () {
         try {
             var result = TrafficDensityLoader_1.default.getAllTrafficDensityAreas();
             res.send(result);
-            console.log("GeoAnalyzerController: Traffic sent: " + JSON.stringify(result));
+            console.log("GeoAnalyzerController: Traffic sent");
         }
         catch (err) {
             res.send("GeoAnalyzerController: an error occured: " + err);

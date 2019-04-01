@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/TrafficDensityAreasLoader.ts
+// /src/loaders/geoanalyzer/TrafficDensityAreasLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var TrafficDensityAreasLoader = /** @class */ (function () {
     function TrafficDensityAreasLoader() {
         this.trafficDensityAreasUrl = configuration_1.default.HIGH_TRAFFIC_DENSITY_AREAS_PRO;
         this.trafficDensityAreas = [];
-        console.log("TrafficDensityAreasLoader initiated");
         this.loadTrafficDensityAreas();
+        this.reload();
     }
     // fetch all trafficDensityAreas from the server to the object
     TrafficDensityAreasLoader.prototype.loadTrafficDensityAreas = function () {
@@ -33,6 +33,11 @@ var TrafficDensityAreasLoader = /** @class */ (function () {
     // get all trafficDensityAreas from trafficDensityAreas object
     TrafficDensityAreasLoader.prototype.getAllTrafficDensityAreas = function () {
         return this.trafficDensityAreas;
+    };
+    TrafficDensityAreasLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadTrafficDensityAreas, 86400000);
     };
     return TrafficDensityAreasLoader;
 }());

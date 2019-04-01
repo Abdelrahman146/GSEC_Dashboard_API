@@ -1,4 +1,4 @@
-// /src/loaders/ElectricityLoader.ts
+// /src/loaders/geoanalyzer/ElectricityLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class ElectricityLoader {
 
     constructor() {
         this.electricityConsumption = [];
-        console.log("ElectricityConsumptionLoader: initiated");
         this.loadElectricity();
+        this.reload();
     }
 
     // fetch all electricityConsumption from the server to the object
@@ -44,6 +44,12 @@ class ElectricityLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadElectricity, 86400000);
     }
 
 }

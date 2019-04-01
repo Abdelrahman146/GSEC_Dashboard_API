@@ -1,4 +1,4 @@
-// /src/loaders/TrafficDensityAreasLoader.ts
+// /src/loaders/geoanalyzer/TrafficDensityAreasLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class TrafficDensityAreasLoader {
 
     constructor() {
         this.trafficDensityAreas = [];
-        console.log("TrafficDensityAreasLoader initiated");
         this.loadTrafficDensityAreas();
+        this.reload();
     }
 
     // fetch all trafficDensityAreas from the server to the object
@@ -34,6 +34,12 @@ class TrafficDensityAreasLoader {
     // get all trafficDensityAreas from trafficDensityAreas object
     public getAllTrafficDensityAreas(): any {
         return this.trafficDensityAreas;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadTrafficDensityAreas, 86400000);
     }
 
 }

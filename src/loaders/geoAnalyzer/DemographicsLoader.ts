@@ -1,4 +1,4 @@
-// /src/loaders/DemographicsLoader.ts
+// /src/loaders/geoanalyzer/DemographicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class DemographicsLoader {
 
     constructor() {
         this.demographics = [];
-        console.log("DemographicsLoader: initiated");
         this.loadDemographics();
+        this.reload();
     }
 
     // fetch all demographics from the server to the object
@@ -89,6 +89,12 @@ class DemographicsLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadDemographics, 86400000);
     }
 
 }

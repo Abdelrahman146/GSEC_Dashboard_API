@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/HotelsLoader.ts
+// /src/loaders/geoanalyzer/HotelsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var HotelsLoader = /** @class */ (function () {
     function HotelsLoader() {
         this.hotelsUrl = configuration_1.default.GEO_ANALYZER_HOTELS_PRO;
         this.hotels = [];
-        console.log("HotelsLoader: initiated");
         this.loadHotels();
+        this.reload();
     }
     // fetch all hotels from the server to the object
     HotelsLoader.prototype.loadHotels = function () {
@@ -33,6 +33,21 @@ var HotelsLoader = /** @class */ (function () {
     // get all hotels from hotels object
     HotelsLoader.prototype.getAllHotels = function () {
         return this.hotels;
+    };
+    // // get a specific hotels by geometry
+    // public getHotelsByGeometry(geometry: any): any {
+    //     let result: any = [];
+    //     this.hotels.forEach(element => {
+    //         if(geometry.contains(element.geometry)) {
+    //             result.push(element);
+    //         }
+    //     });
+    //     return result;
+    // }
+    HotelsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadHotels, 86400000);
     };
     return HotelsLoader;
 }());

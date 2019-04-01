@@ -1,4 +1,4 @@
-// /src/controllers/geoAnalyzer/ElectricityController.ts
+// /src/controllers/geoAnalyzer/FeaturesController.ts
 
 import PointsLoader from '../loaders/features/PointsLoader';
 import LinesLoader from '../loaders/features/LinesLoader';
@@ -8,18 +8,18 @@ import { Request, Response } from 'express';
 class FeaturesController {
 
     constructor() {
-        console.log("FeaturesController Initiated");
+        console.log("FeaturesController: has started");
     }
 
     // reload points object
     public async loadPoints( req: Request, res: Response) {
         try {
             await PointsLoader.loadPoints();
-            res.send("pointsObject has reloaded");
-            console.log("pointsObject has reloaded");
+            res.send("FeaturesController: pointsObject has reloaded");
+            console.log("FeaturesController: pointsObject has reloaded");
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
 
         }
     }
@@ -28,11 +28,11 @@ class FeaturesController {
     public async loadLines( req: Request, res: Response) {
         try {
             await LinesLoader.loadLines();
-            res.send("LinesObject has reloaded");
-            console.log("LinesObject has reloaded");
+            res.send("FeaturesController: LinesObject has reloaded");
+            console.log("FeaturesController: LinesObject has reloaded");
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
 
         }
     }
@@ -41,11 +41,11 @@ class FeaturesController {
     public async loadPolygons( req: Request, res: Response) {
         try {
             await PolygonsLoader.loadPolygons();
-            res.send("polygonsObject has reloaded");
-            console.log("polygonsObject has reloaded");
+            res.send("FeaturesController: polygonsObject has reloaded");
+            console.log("FeaturesController: polygonsObject has reloaded");
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
 
         }
     }
@@ -55,10 +55,10 @@ class FeaturesController {
         try {
             let pointsObject: any = PointsLoader.getAllPoints();
             res.send(pointsObject);
-            console.log(`points object sent: ${JSON.stringify(pointsObject)}`);
+            console.log(`FeaturesController: points object sent`);
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
         }
     }
 
@@ -67,10 +67,10 @@ class FeaturesController {
         try {
             let linesObject: any = LinesLoader.getAllLines();
             res.send(linesObject);
-            console.log(`lines object sent: ${JSON.stringify(linesObject)}`);
+            console.log(`FeaturesController: lines object sent`);
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
         }
     }
 
@@ -79,10 +79,10 @@ class FeaturesController {
         try {
             let polygonsObject: any = PolygonsLoader.getAllPolygons();
             res.send(polygonsObject);
-            console.log(`polygon object sent: ${JSON.stringify(polygonsObject)}`);
+            console.log(`FeaturesController: polygon object sent`);
         }catch(err) {
-            res.send(`an error occured: ${err}`);
-            console.log(`an error occured: ${err}`);
+            res.send(`FeaturesController: an error occured: ${err}`);
+            console.log(`FeaturesController: an error occured: ${err}`);
         }
     }
     

@@ -1,4 +1,4 @@
-// /src/loaders/ProjectsLoader.ts
+// /src/loaders/geoanalyzer/ProjectsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
@@ -21,8 +21,8 @@ class ProjectsLoader {
 
     constructor() {
         this.projects = [];
-        console.log("ProjectsLoader initiated");
         this.loadProjects();
+        this.reloadProjects();
     }
 
     public loadProjects() {
@@ -117,7 +117,6 @@ class ProjectsLoader {
                     project.features.lines.forEach((line: any) => {
                         line.geometry.paths.forEach((path: any) => {
                             path.forEach((point: any) => {
-                                console.log(point[0]);
                                 if(xmax < point[0]){xmax = point[0]}
                                 if(xmin > point[0]){xmin = point[0]}
                                 if(ymax < point[1]){ymax = point[1]}

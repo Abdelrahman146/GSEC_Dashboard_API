@@ -12,7 +12,7 @@ var Routes = /** @class */ (function () {
         this.projectsController = new ProjectsController_1.default();
         this.featuresController = new FeaturesController_1.default();
         this.geoAnalyzerController = new GeoAnalyzerController_1.default();
-        console.log("Routes initiated");
+        console.log("Routes has started");
     }
     Routes.prototype.routes = function (app) {
         // ===================== Projects [reload] =====================

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/ClinicsLoader.ts
+// /src/loaders/geoanalyzer/ClinicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var ClinicsLoader = /** @class */ (function () {
     function ClinicsLoader() {
         this.clinicsUrl = configuration_1.default.GEO_ANALYZER_CLINICS_PRO;
         this.clinics = [];
-        console.log("ClinicsLoader initiated");
         this.loadClinics();
+        this.reload();
     }
     // fetch all clinics from the server to the object
     ClinicsLoader.prototype.loadClinics = function () {
@@ -42,6 +42,11 @@ var ClinicsLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    ClinicsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadClinics, 86400000);
     };
     return ClinicsLoader;
 }());

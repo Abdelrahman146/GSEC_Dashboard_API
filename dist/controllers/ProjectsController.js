@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ProjectsLoader_1 = __importDefault(require("../loaders/ProjectsLoader"));
 var ProjectsController = /** @class */ (function () {
     function ProjectsController() {
-        console.log("ProjectsController Initiated");
+        console.log("ProjectsController: has started");
     }
     // load all projects
     ProjectsController.prototype.loadProjects = function (req, res) {
@@ -55,13 +55,13 @@ var ProjectsController = /** @class */ (function () {
                         return [4 /*yield*/, ProjectsLoader_1.default.loadProjects()];
                     case 1:
                         _a.sent();
-                        res.send("projects has been loaded");
-                        console.log("projects has reloaded");
+                        res.send("ProjectsController: projects has been loaded");
+                        console.log("ProjectsController: projects has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_1 = _a.sent();
-                        res.send("an error occured: " + err_1);
-                        console.log("projects has reloaded");
+                        res.send("ProjectsController: an error occured: " + err_1);
+                        console.log("ProjectsController: projects has reloaded");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -73,11 +73,11 @@ var ProjectsController = /** @class */ (function () {
         try {
             var projects = ProjectsLoader_1.default.getAllProjects();
             res.json(projects);
-            console.log("projects sent");
+            console.log("ProjectsController: projects sent");
         }
         catch (err) {
-            res.send("an error occured: " + err);
-            console.log("an error occured: " + err);
+            res.send("ProjectsController: an error occured: " + err);
+            console.log("ProjectsController: an error occured: " + err);
         }
     };
     return ProjectsController;

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PrivateSchoolsLoader.ts
+// /src/loaders/geoanalyzer/PrivateSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var PrivateSchoolsLoader = /** @class */ (function () {
     function PrivateSchoolsLoader() {
         this.privateSchoolsUrl = configuration_1.default.GEO_ANALYZER_PRIVATE_SCHOOLS_PRO;
         this.privateSchools = [];
-        console.log("PrivateSchoolsLoader: initiated");
         this.loadPrivateSchools();
+        this.reload();
     }
     // fetch all privateSchools from the server to the object
     PrivateSchoolsLoader.prototype.loadPrivateSchools = function () {
@@ -33,6 +33,21 @@ var PrivateSchoolsLoader = /** @class */ (function () {
     // get all privateSchools from privateSchools object
     PrivateSchoolsLoader.prototype.getAllPrivateSchools = function () {
         return this.privateSchools;
+    };
+    // // get a specific privateSchools by geometry
+    // public getPrivateSchoolsByGeometry(geometry: any): any {
+    //     let result: any = [];
+    //     this.privateSchools.forEach(element => {
+    //         if(geometry.contains(element.geometry)) {
+    //             result.push(element);
+    //         }
+    //     });
+    //     return result;
+    // }
+    PrivateSchoolsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPrivateSchools, 86400000);
     };
     return PrivateSchoolsLoader;
 }());

@@ -1,4 +1,4 @@
-// /src/loaders/CivilDefenceStationsLoader.ts
+// /src/loaders/geoanalyzer/CivilDefenceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class CivilDefenceStationsLoader {
 
     constructor() {
         this.civilDefenceStations = [];
-        console.log("CivilDefenceStationsLoader initiated");
         this.loadCivilDefenceStations();
+        this.reload();
     }
 
     // fetch all civilDefenceStations from the server to the object
@@ -44,6 +44,12 @@ class CivilDefenceStationsLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadCivilDefenceStations, 86400000);
     }
 
 }

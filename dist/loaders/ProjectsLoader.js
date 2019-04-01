@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/ProjectsLoader.ts
+// /src/loaders/geoanalyzer/ProjectsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
@@ -20,8 +20,8 @@ var ProjectsLoader = /** @class */ (function () {
         this.linesUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_LINES_PRO;
         this.pointsUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_POINTS_PRO;
         this.projects = [];
-        console.log("ProjectsLoader initiated");
         this.loadProjects();
+        this.reloadProjects();
     }
     ProjectsLoader.prototype.loadProjects = function () {
         var that = this;
@@ -123,7 +123,6 @@ var ProjectsLoader = /** @class */ (function () {
                     project.features.lines.forEach(function (line) {
                         line.geometry.paths.forEach(function (path) {
                             path.forEach(function (point) {
-                                console.log(point[0]);
                                 if (xmax < point[0]) {
                                     xmax = point[0];
                                 }
@@ -189,6 +188,11 @@ var ProjectsLoader = /** @class */ (function () {
     ProjectsLoader.prototype.getAllProjects = function () {
         //console.log(`ProjectLoader: requested to get projects ${JSON.stringify(this.projects)}`);
         return this.projects;
+    };
+    ProjectsLoader.prototype.reloadProjects = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadProjects, 86400000);
     };
     return ProjectsLoader;
 }());

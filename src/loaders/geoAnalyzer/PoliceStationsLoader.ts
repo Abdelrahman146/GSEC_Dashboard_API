@@ -1,4 +1,4 @@
-// /src/loaders/PoliceStationsLoader.ts
+// /src/loaders/geoanalyzer/PoliceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class PoliceStationsLoader {
 
     constructor() {
         this.policeStation = [];
-        console.log("PoliceStationsLoader initiated");
         this.loadPoliceStations();
+        this.reload();
     }
 
     // fetch all policeStation from the server to the object
@@ -46,6 +46,12 @@ class PoliceStationsLoader {
     //     });
     //     return result;
     // }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPoliceStations, 86400000);
+    }
 
 }
 

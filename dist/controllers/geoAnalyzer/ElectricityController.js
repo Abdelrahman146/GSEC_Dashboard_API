@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ElectricityLoader_1 = __importDefault(require("../../loaders/geoAnalyzer/ElectricityLoader"));
 var ElectricityController = /** @class */ (function () {
     function ElectricityController() {
-        console.log("ElectricityController Initiated");
+        console.log("ElectricityController has started");
     }
     // load all electricityObject
     ElectricityController.prototype.loadElectricty = function (req, res) {

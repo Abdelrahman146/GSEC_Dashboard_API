@@ -1,4 +1,4 @@
-// /src/loaders/PublicSchoolsLoader.ts
+// /src/loaders/geoanalyzer/PublicSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class PublicSchoolsLoader {
 
     constructor() {
         this.publicSchools = [];
-        console.log("PublicSchoolsLoader initiated");
         this.loadPublicSchools();
+        this.reload();
     }
 
     // fetch all publicSchools from the server to the object
@@ -46,6 +46,12 @@ class PublicSchoolsLoader {
     //     });
     //     return result;
     // }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPublicSchools, 86400000);
+    }
 
 }
 

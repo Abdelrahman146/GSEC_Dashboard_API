@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/polygonsLoader.ts
+// /src/loaders/geoanalyzer/polygonsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
@@ -8,7 +8,7 @@ var PolygonsLoader = /** @class */ (function () {
     function PolygonsLoader() {
         this.polygonsUrl = 'https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/polygons/FeatureServer/2';
         this.polygons = [];
-        console.log("PolygonsLoader initiated");
+        console.log("PolygonsLoader has started");
         this.loadpolygons();
     }
     // fetch all polygons from the server to the object

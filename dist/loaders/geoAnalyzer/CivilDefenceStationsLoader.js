@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/CivilDefenceStationsLoader.ts
+// /src/loaders/geoanalyzer/CivilDefenceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var CivilDefenceStationsLoader = /** @class */ (function () {
     function CivilDefenceStationsLoader() {
         this.civilDefenceStationsUrl = configuration_1.default.GEO_ANALYZER_CIVIL_DEFINCE_STATIONS_PRO;
         this.civilDefenceStations = [];
-        console.log("CivilDefenceStationsLoader initiated");
         this.loadCivilDefenceStations();
+        this.reload();
     }
     // fetch all civilDefenceStations from the server to the object
     CivilDefenceStationsLoader.prototype.loadCivilDefenceStations = function () {
@@ -42,6 +42,11 @@ var CivilDefenceStationsLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    CivilDefenceStationsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadCivilDefenceStations, 86400000);
     };
     return CivilDefenceStationsLoader;
 }());

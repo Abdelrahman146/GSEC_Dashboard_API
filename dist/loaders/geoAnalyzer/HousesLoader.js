@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/HousesLoader.ts
+// /src/loaders/geoanalyzer/HousesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var HousesLoader = /** @class */ (function () {
     function HousesLoader() {
         this.housesUrl = configuration_1.default.GEO_ANALYZER_HOUSES_PRO;
         this.houses = [];
-        console.log("HousesLoader: initiated");
         this.loadHouses();
+        this.reload();
     }
     // fetch all houses from the server to the object
     HousesLoader.prototype.loadHouses = function () {
@@ -43,6 +43,11 @@ var HousesLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    HousesLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadHouses, 86400000);
     };
     return HousesLoader;
 }());

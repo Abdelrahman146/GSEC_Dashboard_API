@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PointsLoader.ts
+// /src/loaders/features/PointsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var PointsLoader = /** @class */ (function () {
     function PointsLoader() {
         this.pointsUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_POINTS_PRO;
         this.points = [];
-        console.log("PointsLoader: initiated");
         this.loadPoints();
+        this.reload();
     }
     // fetch all points from the server to the object
     PointsLoader.prototype.loadPoints = function () {
@@ -33,6 +33,11 @@ var PointsLoader = /** @class */ (function () {
     // get all points from points object
     PointsLoader.prototype.getAllPoints = function () {
         return this.points;
+    };
+    PointsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPoints, 86400000);
     };
     return PointsLoader;
 }());

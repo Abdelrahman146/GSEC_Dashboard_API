@@ -1,4 +1,4 @@
-// /src/controllers/geoAnalyzer/ElectricityController.ts
+// /src/controllers/geoAnalyzer/GeoAnalyzerController.ts
 
 import DemographicsLoader from '../loaders/geoAnalyzer/DemographicsLoader';
 import ElectricityLoader from '../loaders/geoAnalyzer/ElectricityLoader';
@@ -20,7 +20,7 @@ import { Request, Response } from 'express';
 class GeoAnalyzerController {
 
     constructor() {
-        console.log("GeoAnalyzerController: Initiated");
+        console.log("GeoAnalyzerController: has started");
     }
 
     // reload Demographic object
@@ -123,7 +123,7 @@ class GeoAnalyzerController {
         try {
             let result: any = WaterLoader.getWaterObject();
             res.send(result);
-            console.log(`GeoAnalyzerController: total water consumption sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: total water consumption sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -147,7 +147,7 @@ class GeoAnalyzerController {
         try {
             let result: any = ElectricityLoader.getElectricityObject();
             res.send(result);
-            console.log(`GeoAnalyzerController: total electricity consumption sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: total electricity consumption sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -171,7 +171,7 @@ class GeoAnalyzerController {
         try {
             let result: any = HospitalsLoader.getAllHospitals();
             res.send(result);
-            console.log(`GeoAnalyzerController: hospitals sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: hospitals sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -195,7 +195,7 @@ class GeoAnalyzerController {
         try {
             let result: any = ClinicsLoader.getAllClinics();
             res.send(result);
-            console.log(`GeoAnalyzerController: clinics sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: clinics sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -219,7 +219,7 @@ class GeoAnalyzerController {
         try {
             let result: any = PoliceStationsLoader.getAllPoliceStations();
             res.send(result);
-            console.log(`GeoAnalyzerController: PoliceStations sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: PoliceStations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: n error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -243,7 +243,7 @@ class GeoAnalyzerController {
         try {
             let result: any = CivilDefenceStationsLoader.getAllCivilDefenceStations();
             res.send(result);
-            console.log(`GeoAnalyzerController: CivilDefence Stations sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: CivilDefence Stations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -267,7 +267,7 @@ class GeoAnalyzerController {
         try {
             let result: any = AmbulanceStationsLoader.getAllAmbulanceStations();
             res.send(result);
-            console.log(`GeoAnalyzerController: Ambulance Stations sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: Ambulance Stations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`an error occured: ${err}`);
@@ -291,7 +291,7 @@ class GeoAnalyzerController {
         try {
             let result: any = PrivateSchoolsLoader.getAllPrivateSchools();
             res.send(result);
-            console.log(`GeoAnalyzerController: PrivateSchools sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: PrivateSchools sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -315,7 +315,7 @@ class GeoAnalyzerController {
         try {
             let result: any = PublicSchoolsLoader.getAllPublicSchools();
             res.send(result);
-            console.log(`GeoAnalyzerController: PublicSchools sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: PublicSchools sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -339,7 +339,7 @@ class GeoAnalyzerController {
         try {
             let result: any = PlacesOfWorshipLoader.getAllPlacesOfWorship();
             res.send(result);
-            console.log(`GeoAnalyzerController: PlacesOfWorship sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: PlacesOfWorship sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -363,7 +363,7 @@ class GeoAnalyzerController {
         try {
             let result: any = HotelsLoader.getAllHotels();
             res.send(result);
-            console.log(`GeoAnalyzerController: Hotels sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: Hotels sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -387,7 +387,7 @@ class GeoAnalyzerController {
         try {
             let result: any = HousesLoader.getAllHouses();
             res.send(result);
-            console.log(`GeoAnalyzerController: Houses sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: Houses sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
@@ -411,7 +411,7 @@ class GeoAnalyzerController {
         try {
             let result: any = TrafficDensityLoader.getAllTrafficDensityAreas();
             res.send(result);
-            console.log(`GeoAnalyzerController: Traffic sent: ${JSON.stringify(result)}`);
+            console.log(`GeoAnalyzerController: Traffic sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);

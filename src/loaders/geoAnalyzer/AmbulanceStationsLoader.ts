@@ -1,4 +1,4 @@
-// /src/loaders/AmbulanceStationsLoader.ts
+// /src/loaders/geoanalyzer/AmbulanceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class AmbulanceStationsLoader {
 
     constructor() {
         this.ambulanceStations = [];
-        console.log("AmbulanceStationsLoader initiated");
         this.loadAmbulanceStations();
+        this.reload();
     }
 
     // fetch all ambulanceStations from the server to the object
@@ -44,6 +44,12 @@ class AmbulanceStationsLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadAmbulanceStations, 86400000);
     }
 
 }

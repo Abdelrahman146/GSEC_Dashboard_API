@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/AmbulanceStationsLoader.ts
+// /src/loaders/geoanalyzer/AmbulanceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var AmbulanceStationsLoader = /** @class */ (function () {
     function AmbulanceStationsLoader() {
         this.ambulanceStationsUrl = configuration_1.default.GEO_ANALYZER_AMBULANCE_STATIONS_PRO;
         this.ambulanceStations = [];
-        console.log("AmbulanceStationsLoader initiated");
         this.loadAmbulanceStations();
+        this.reload();
     }
     // fetch all ambulanceStations from the server to the object
     AmbulanceStationsLoader.prototype.loadAmbulanceStations = function () {
@@ -42,6 +42,11 @@ var AmbulanceStationsLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    AmbulanceStationsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadAmbulanceStations, 86400000);
     };
     return AmbulanceStationsLoader;
 }());

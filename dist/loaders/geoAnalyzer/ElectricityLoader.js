@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/ElectricityLoader.ts
+// /src/loaders/geoanalyzer/ElectricityLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var ElectricityLoader = /** @class */ (function () {
     function ElectricityLoader() {
         this.electricityConsumptionUrl = configuration_1.default.GEO_ANALYZER_ELECTRIC_CONSUMPTION_PRO;
         this.electricityConsumption = [];
-        console.log("ElectricityConsumptionLoader: initiated");
         this.loadElectricity();
+        this.reload();
     }
     // fetch all electricityConsumption from the server to the object
     ElectricityLoader.prototype.loadElectricity = function () {
@@ -42,6 +42,11 @@ var ElectricityLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    ElectricityLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadElectricity, 86400000);
     };
     return ElectricityLoader;
 }());

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/DemographicsLoader.ts
+// /src/loaders/geoanalyzer/DemographicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var DemographicsLoader = /** @class */ (function () {
     function DemographicsLoader() {
         this.demographicsUrl = configuration_1.default.GEO_ANALYZER_DEMOGRAPHICS_PRO;
         this.demographics = [];
-        console.log("DemographicsLoader: initiated");
         this.loadDemographics();
+        this.reload();
     }
     // fetch all demographics from the server to the object
     DemographicsLoader.prototype.loadDemographics = function () {
@@ -83,6 +83,11 @@ var DemographicsLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    DemographicsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadDemographics, 86400000);
     };
     return DemographicsLoader;
 }());

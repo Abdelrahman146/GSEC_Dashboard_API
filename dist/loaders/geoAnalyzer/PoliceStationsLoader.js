@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PoliceStationsLoader.ts
+// /src/loaders/geoanalyzer/PoliceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var PoliceStationsLoader = /** @class */ (function () {
     function PoliceStationsLoader() {
         this.policeStationUrl = configuration_1.default.GEO_ANALYZER_POLICE_STATIONS_PRO;
         this.policeStation = [];
-        console.log("PoliceStationsLoader initiated");
         this.loadPoliceStations();
+        this.reload();
     }
     // fetch all policeStation from the server to the object
     PoliceStationsLoader.prototype.loadPoliceStations = function () {
@@ -33,6 +33,21 @@ var PoliceStationsLoader = /** @class */ (function () {
     // get all policeStation from policeStation object
     PoliceStationsLoader.prototype.getAllPoliceStations = function () {
         return this.policeStation;
+    };
+    // // get a specific policeStation by geometry
+    // public getPoliceStationsByGeometry(geometry: any): any {
+    //     let result: any = [];
+    //     this.policeStation.forEach(element => {
+    //         if(geometry.contains(element.geometry)) {
+    //             result.push(element);
+    //         }
+    //     });
+    //     return result;
+    // }
+    PoliceStationsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPoliceStations, 86400000);
     };
     return PoliceStationsLoader;
 }());

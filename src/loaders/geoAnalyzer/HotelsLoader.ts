@@ -1,4 +1,4 @@
-// /src/loaders/HotelsLoader.ts
+// /src/loaders/geoanalyzer/HotelsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class HotelsLoader {
 
     constructor() {
         this.hotels = [];
-        console.log("HotelsLoader: initiated");
         this.loadHotels();
+        this.reload();
     }
 
     // fetch all hotels from the server to the object
@@ -46,6 +46,12 @@ class HotelsLoader {
     //     });
     //     return result;
     // }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadHotels, 86400000);
+    }
 
 }
 

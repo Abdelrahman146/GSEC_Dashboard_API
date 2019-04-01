@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PublicSchoolsLoader.ts
+// /src/loaders/geoanalyzer/PublicSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var PublicSchoolsLoader = /** @class */ (function () {
     function PublicSchoolsLoader() {
         this.publicSchoolsUrl = configuration_1.default.GEO_ANALYZER_PUBLIC_SCHOOLS_PRO;
         this.publicSchools = [];
-        console.log("PublicSchoolsLoader initiated");
         this.loadPublicSchools();
+        this.reload();
     }
     // fetch all publicSchools from the server to the object
     PublicSchoolsLoader.prototype.loadPublicSchools = function () {
@@ -33,6 +33,21 @@ var PublicSchoolsLoader = /** @class */ (function () {
     // get all publicSchools from publicSchools object
     PublicSchoolsLoader.prototype.getAllPublicSchools = function () {
         return this.publicSchools;
+    };
+    // // get a specific publicSchools by geometry
+    // public getPublicSchoolsByGeometry(geometry: any): number {
+    //     let result: any = [];
+    //     this.publicSchools.forEach(element => {
+    //         if(geometry.contains(element.geometry)) {
+    //             result.push(element);
+    //         }
+    //     });
+    //     return result;
+    // }
+    PublicSchoolsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPublicSchools, 86400000);
     };
     return PublicSchoolsLoader;
 }());

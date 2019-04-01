@@ -1,4 +1,4 @@
-// /src/loaders/LinesLoader.ts
+// /src/loaders/features/LinesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class LinesLoader {
 
     constructor() {
         this.lines = [];
-        console.log("LinesLoader initiated");
         this.loadLines();
+        this.reloadLines();
     }
 
     // fetch all lines from the server to the object
@@ -34,6 +34,12 @@ class LinesLoader {
     // get all lines from lines object
     public getAllLines(): any {
         return this.lines;
+    }
+
+    private reloadLines(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadLines, 86400000);
     }
 
 }

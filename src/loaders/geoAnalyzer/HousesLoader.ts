@@ -1,4 +1,4 @@
-// /src/loaders/HousesLoader.ts
+// /src/loaders/geoanalyzer/HousesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class HousesLoader {
 
     constructor() {
         this.houses = [];
-        console.log("HousesLoader: initiated");
         this.loadHouses();
+        this.reload();
     }
 
     // fetch all houses from the server to the object
@@ -45,6 +45,12 @@ class HousesLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadHouses, 86400000);
     }
 
 }

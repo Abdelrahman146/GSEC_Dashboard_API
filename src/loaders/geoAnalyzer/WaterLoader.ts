@@ -1,4 +1,4 @@
-// /src/loaders/WaterLoader.ts
+// /src/loaders/geoanalyzer/WaterLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class WaterLoader {
 
     constructor() {
         this.waterConsumption = [];
-        console.log("WaterConsumptionLoader: initiated");
         this.loadWater();
+        this.reload();
     }
 
     // fetch all waterConsumption from the server to the object
@@ -46,6 +46,12 @@ class WaterLoader {
     //     });
     //     return result;
     // }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadWater, 86400000);
+    }
 
 }
 

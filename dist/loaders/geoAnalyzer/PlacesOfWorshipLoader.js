@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PlacesOfWorshipLoader.ts
+// /src/loaders/geoanalyzer/PlacesOfWorshipLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var PlacesOfWorshipLoader = /** @class */ (function () {
     function PlacesOfWorshipLoader() {
         this.placesOfWorshipUrl = configuration_1.default.GEO_ANALYZER_PLACES_OF_WORSHIP_PRO;
         this.placesOfWorship = [];
-        console.log("PlacesOfWorshipLoader: initiated");
         this.loadPlacesOfWorship();
+        this.reload();
     }
     // fetch all placesOfWorship from the server to the object
     PlacesOfWorshipLoader.prototype.loadPlacesOfWorship = function () {
@@ -42,6 +42,11 @@ var PlacesOfWorshipLoader = /** @class */ (function () {
             }
         });
         return result;
+    };
+    PlacesOfWorshipLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPlacesOfWorship, 86400000);
     };
     return PlacesOfWorshipLoader;
 }());

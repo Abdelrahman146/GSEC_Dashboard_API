@@ -1,4 +1,4 @@
-// /src/loaders/ClinicsLoader.ts
+// /src/loaders/geoanalyzer/ClinicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class ClinicsLoader {
 
     constructor() {
         this.clinics = [];
-        console.log("ClinicsLoader initiated");
         this.loadClinics();
+        this.reload();
     }
 
     // fetch all clinics from the server to the object
@@ -46,6 +46,11 @@ class ClinicsLoader {
         return result;
     }
 
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadClinics, 86400000);
+    }
 }
 
 export default new ClinicsLoader();

@@ -1,4 +1,4 @@
-// /src/loaders/PolygonsLoader.ts
+// /src/loaders/features/PolygonsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -13,8 +13,8 @@ class PolygonsLoader {
 
     constructor() {
         this.polygons = [];
-        console.log("PolygonsLoader: initiated");
         this.loadPolygons();
+        this.reload();
     }
 
     // fetch all polygons from the server to the object
@@ -35,6 +35,12 @@ class PolygonsLoader {
     // get all polygons from polygons object
     public getAllPolygons(): any {
         return this.polygons;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPolygons, 86400000);
     }
 
 }

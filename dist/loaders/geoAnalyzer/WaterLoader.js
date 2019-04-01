@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/WaterLoader.ts
+// /src/loaders/geoanalyzer/WaterLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var WaterLoader = /** @class */ (function () {
     function WaterLoader() {
         this.waterConsumptionUrl = configuration_1.default.GEO_ANALYZER_WATER_CONSUMPTION_PRO;
         this.waterConsumption = [];
-        console.log("WaterConsumptionLoader: initiated");
         this.loadWater();
+        this.reload();
     }
     // fetch all waterConsumption from the server to the object
     WaterLoader.prototype.loadWater = function () {
@@ -33,6 +33,21 @@ var WaterLoader = /** @class */ (function () {
     // get all waterConsumption from waterConsumption object
     WaterLoader.prototype.getWaterObject = function () {
         return this.waterConsumption;
+    };
+    // // get a specific waterConsumption by geometry
+    // public getTotalWaterConsumptionByGeometry(geometry: any): number {
+    //     let result: number = 0;
+    //     this.waterConsumption.forEach(element => {
+    //         if(geometry.contains(element.geometry)) {
+    //             result += element.attributes.W_DAILY_CONS_M3;
+    //         }
+    //     });
+    //     return result;
+    // }
+    WaterLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadWater, 86400000);
     };
     return WaterLoader;
 }());

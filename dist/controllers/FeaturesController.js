@@ -1,5 +1,5 @@
 "use strict";
-// /src/controllers/geoAnalyzer/ElectricityController.ts
+// /src/controllers/geoAnalyzer/FeaturesController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -44,7 +44,7 @@ var LinesLoader_1 = __importDefault(require("../loaders/features/LinesLoader"));
 var PolygonsLoader_1 = __importDefault(require("../loaders/features/PolygonsLoader"));
 var FeaturesController = /** @class */ (function () {
     function FeaturesController() {
-        console.log("FeaturesController Initiated");
+        console.log("FeaturesController: has started");
     }
     // reload points object
     FeaturesController.prototype.loadPoints = function (req, res) {
@@ -57,13 +57,13 @@ var FeaturesController = /** @class */ (function () {
                         return [4 /*yield*/, PointsLoader_1.default.loadPoints()];
                     case 1:
                         _a.sent();
-                        res.send("pointsObject has reloaded");
-                        console.log("pointsObject has reloaded");
+                        res.send("FeaturesController: pointsObject has reloaded");
+                        console.log("FeaturesController: pointsObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_1 = _a.sent();
-                        res.send("an error occured: " + err_1);
-                        console.log("an error occured: " + err_1);
+                        res.send("FeaturesController: an error occured: " + err_1);
+                        console.log("FeaturesController: an error occured: " + err_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -81,13 +81,13 @@ var FeaturesController = /** @class */ (function () {
                         return [4 /*yield*/, LinesLoader_1.default.loadLines()];
                     case 1:
                         _a.sent();
-                        res.send("LinesObject has reloaded");
-                        console.log("LinesObject has reloaded");
+                        res.send("FeaturesController: LinesObject has reloaded");
+                        console.log("FeaturesController: LinesObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_2 = _a.sent();
-                        res.send("an error occured: " + err_2);
-                        console.log("an error occured: " + err_2);
+                        res.send("FeaturesController: an error occured: " + err_2);
+                        console.log("FeaturesController: an error occured: " + err_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -105,13 +105,13 @@ var FeaturesController = /** @class */ (function () {
                         return [4 /*yield*/, PolygonsLoader_1.default.loadPolygons()];
                     case 1:
                         _a.sent();
-                        res.send("polygonsObject has reloaded");
-                        console.log("polygonsObject has reloaded");
+                        res.send("FeaturesController: polygonsObject has reloaded");
+                        console.log("FeaturesController: polygonsObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_3 = _a.sent();
-                        res.send("an error occured: " + err_3);
-                        console.log("an error occured: " + err_3);
+                        res.send("FeaturesController: an error occured: " + err_3);
+                        console.log("FeaturesController: an error occured: " + err_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -123,11 +123,11 @@ var FeaturesController = /** @class */ (function () {
         try {
             var pointsObject = PointsLoader_1.default.getAllPoints();
             res.send(pointsObject);
-            console.log("points object sent: " + JSON.stringify(pointsObject));
+            console.log("FeaturesController: points object sent");
         }
         catch (err) {
-            res.send("an error occured: " + err);
-            console.log("an error occured: " + err);
+            res.send("FeaturesController: an error occured: " + err);
+            console.log("FeaturesController: an error occured: " + err);
         }
     };
     // get lines object
@@ -135,11 +135,11 @@ var FeaturesController = /** @class */ (function () {
         try {
             var linesObject = LinesLoader_1.default.getAllLines();
             res.send(linesObject);
-            console.log("lines object sent: " + JSON.stringify(linesObject));
+            console.log("FeaturesController: lines object sent");
         }
         catch (err) {
-            res.send("an error occured: " + err);
-            console.log("an error occured: " + err);
+            res.send("FeaturesController: an error occured: " + err);
+            console.log("FeaturesController: an error occured: " + err);
         }
     };
     // get polygons object
@@ -147,11 +147,11 @@ var FeaturesController = /** @class */ (function () {
         try {
             var polygonsObject = PolygonsLoader_1.default.getAllPolygons();
             res.send(polygonsObject);
-            console.log("polygon object sent: " + JSON.stringify(polygonsObject));
+            console.log("FeaturesController: polygon object sent");
         }
         catch (err) {
-            res.send("an error occured: " + err);
-            console.log("an error occured: " + err);
+            res.send("FeaturesController: an error occured: " + err);
+            console.log("FeaturesController: an error occured: " + err);
         }
     };
     return FeaturesController;

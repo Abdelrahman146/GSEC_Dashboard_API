@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/LinesLoader.ts
+// /src/loaders/features/LinesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var LinesLoader = /** @class */ (function () {
     function LinesLoader() {
         this.linesUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_LINES_PRO;
         this.lines = [];
-        console.log("LinesLoader initiated");
         this.loadLines();
+        this.reloadLines();
     }
     // fetch all lines from the server to the object
     LinesLoader.prototype.loadLines = function () {
@@ -33,6 +33,11 @@ var LinesLoader = /** @class */ (function () {
     // get all lines from lines object
     LinesLoader.prototype.getAllLines = function () {
         return this.lines;
+    };
+    LinesLoader.prototype.reloadLines = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadLines, 86400000);
     };
     return LinesLoader;
 }());

@@ -1,4 +1,4 @@
-// /src/loaders/PrivateSchoolsLoader.ts
+// /src/loaders/geoanalyzer/PrivateSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,9 @@ class PrivateSchoolsLoader {
 
     constructor() {
         this.privateSchools = [];
-        console.log("PrivateSchoolsLoader: initiated");
         this.loadPrivateSchools();
+        this.reload();
+        
     }
 
     // fetch all privateSchools from the server to the object
@@ -46,6 +47,12 @@ class PrivateSchoolsLoader {
     //     });
     //     return result;
     // }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPrivateSchools, 86400000);
+    }
 
 }
 

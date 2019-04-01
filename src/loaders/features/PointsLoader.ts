@@ -1,4 +1,4 @@
-// /src/loaders/PointsLoader.ts
+// /src/loaders/features/PointsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -11,8 +11,8 @@ class PointsLoader {
 
     constructor() {
         this.points = [];
-        console.log("PointsLoader: initiated");
         this.loadPoints();
+        this.reload();
     }
 
     // fetch all points from the server to the object
@@ -33,6 +33,12 @@ class PointsLoader {
     // get all points from points object
     public getAllPoints(): any {
         return this.points;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPoints, 86400000);
     }
 
 }

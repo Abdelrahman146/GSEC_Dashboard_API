@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/PolygonsLoader.ts
+// /src/loaders/features/PolygonsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -13,8 +13,8 @@ var PolygonsLoader = /** @class */ (function () {
         //private polygonsUrl = 'https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/polygons/FeatureServer/2';
         this.polygonsUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_POLY_PRO;
         this.polygons = [];
-        console.log("PolygonsLoader: initiated");
         this.loadPolygons();
+        this.reload();
     }
     // fetch all polygons from the server to the object
     PolygonsLoader.prototype.loadPolygons = function () {
@@ -34,6 +34,11 @@ var PolygonsLoader = /** @class */ (function () {
     // get all polygons from polygons object
     PolygonsLoader.prototype.getAllPolygons = function () {
         return this.polygons;
+    };
+    PolygonsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPolygons, 86400000);
     };
     return PolygonsLoader;
 }());

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// /src/loaders/HospitalsLoader.ts
+// /src/loaders/geoanalyzer/HospitalsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
@@ -12,8 +12,8 @@ var HospitalsLoader = /** @class */ (function () {
     function HospitalsLoader() {
         this.hospitalsUrl = configuration_1.default.GEO_ANALYZER_HOSPITALS_PRO;
         this.hospitals = [];
-        console.log("HospitalsLoader: initiated");
         this.loadHospitals();
+        this.reload();
     }
     // fetch all hospitals from the server to the object
     HospitalsLoader.prototype.loadHospitals = function () {
@@ -40,6 +40,11 @@ var HospitalsLoader = /** @class */ (function () {
         });
         console.log("HospitalsLoader: hospitals sent");
         return result;
+    };
+    HospitalsLoader.prototype.reload = function () {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadHospitals, 86400000);
     };
     return HospitalsLoader;
 }());

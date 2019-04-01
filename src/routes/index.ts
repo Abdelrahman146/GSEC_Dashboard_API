@@ -14,7 +14,7 @@ export class Routes {
         this.projectsController = new ProjectsController();
         this.featuresController = new FeaturesController();
         this.geoAnalyzerController = new GeoAnalyzerController();
-        console.log("Routes initiated");
+        console.log("Routes has started");
     }
     public routes(app: any): void {
         // ===================== Projects [reload] =====================

@@ -1,4 +1,4 @@
-// /src/loaders/PlacesOfWorshipLoader.ts
+// /src/loaders/geoanalyzer/PlacesOfWorshipLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
@@ -12,8 +12,8 @@ class PlacesOfWorshipLoader {
 
     constructor() {
         this.placesOfWorship = [];
-        console.log("PlacesOfWorshipLoader: initiated");
         this.loadPlacesOfWorship();
+        this.reload();
     }
 
     // fetch all placesOfWorship from the server to the object
@@ -44,6 +44,12 @@ class PlacesOfWorshipLoader {
             }
         });
         return result;
+    }
+
+    private reload(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadPlacesOfWorship, 86400000);
     }
 
 }
