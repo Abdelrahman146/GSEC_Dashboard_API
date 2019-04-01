@@ -73,7 +73,7 @@ var ProjectsController = /** @class */ (function () {
         try {
             var projects = ProjectsLoader_1.default.getAllProjects();
             res.json(projects);
-            console.log("projects sent " + JSON.stringify(ProjectsLoader_1.default.getAllProjects()));
+            console.log("projects sent");
         }
         catch (err) {
             res.send("an error occured: " + err);

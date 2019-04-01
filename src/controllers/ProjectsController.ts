@@ -29,7 +29,7 @@ class ProjectsController {
         try {
             let projects: any = projectsLoader.getAllProjects();
             res.json(projects);
-            console.log(`projects sent ${JSON.stringify(projectsLoader.getAllProjects())}`);
+            console.log(`projects sent`);
         }catch(err) {
             res.send(`an error occured: ${err}`);
             console.log(`an error occured: ${err}`);
