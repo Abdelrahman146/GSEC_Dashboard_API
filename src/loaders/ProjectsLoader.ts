@@ -105,7 +105,7 @@ class ProjectsLoader {
                             if(xmax < point[0]){xmax = point[0]}
                             if(xmin > point[0]){xmin = point[0]}
                             if(ymax < point[1]){ymax = point[1]}
-                            if(ymin < point[1]){ymin = point[1]}
+                            if(ymin > point[1]){ymin = point[1]}
                         });
                     });
                 });
