@@ -165,6 +165,12 @@ class ProjectsLoader {
         return this.projects;
     }
 
+    private reloadProjects(): any {
+        // each day: 86400000 millie seconds
+        // each week: 604800000 millie seconds
+        setInterval(this.loadProjects, 86400000);
+    }
+
 }
 
 export default new ProjectsLoader();
