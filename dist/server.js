@@ -6,7 +6,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_1 = __importDefault(require("./app"));
 var port = process.env.PORT || 5437;
-app_1.default.listen(port, function () {
+//const port = '';
+app_1.default.listen(function () {
     console.log("GSEC dashboard API has started successfully at PORT: " + port);
 });
 //# sourceMappingURL=server.js.map

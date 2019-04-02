@@ -45,7 +45,6 @@ var ProjectsLoader = /** @class */ (function () {
                 where: "project_id='" + project.projectId + "'"
             })
                 .then(function (results) {
-                //console.log(`ProjectLoader: fetching geometries for project ${p++} / ${projects.length}`);
                 project.features.polygons = results.features;
                 i++;
                 p++;
@@ -54,7 +53,9 @@ var ProjectsLoader = /** @class */ (function () {
                     console.log("ProjectsLoader: done fetching " + i + " features");
                     _this.calculateMarkersLocation();
                 }
-                else if (p == Math.ceil(projects.length * 0.5) || p == Math.ceil(projects.length * 0.2) || p == Math.ceil(projects.length * 0.9) || p == Math.ceil(projects.length * 0.7) || p == Math.ceil(projects.length * 0.1)) {
+                else if (p == Math.ceil(projects.length * 0.5) || p == Math.ceil(projects.length * 0.2)
+                    || p == Math.ceil(projects.length * 0.9) || p == Math.ceil(projects.length * 0.7)
+                    || p == Math.ceil(projects.length * 0.1)) {
                     console.log("ProjectsLoader: fetched: " + p);
                 }
             }).catch(function (err) {
@@ -115,11 +116,9 @@ var ProjectsLoader = /** @class */ (function () {
                 });
             }
             catch (err) {
-                //console.error(`ProjectLoader error: (polygons) ${p} -  ${err}`);
             }
             finally {
                 try {
-                    //console.log(`getting lines for project ${p}`);
                     project.features.lines.forEach(function (line) {
                         line.geometry.paths.forEach(function (path) {
                             path.forEach(function (point) {
@@ -140,11 +139,9 @@ var ProjectsLoader = /** @class */ (function () {
                     });
                 }
                 catch (err) {
-                    //console.error(`ProjectLoader error: (lines) ${p} - ${err}`);
                 }
                 finally {
                     try {
-                        //console.log(`getting points for project ${p}`);
                         project.features.points.forEach(function (p) {
                             if (xmax < p.geometry.x) {
                                 xmax = p.geometry.x;
@@ -161,7 +158,6 @@ var ProjectsLoader = /** @class */ (function () {
                         });
                     }
                     catch (err) {
-                        //console.error(`ProjectLoader error: (points) ${p} - ${err}`);
                     }
                     finally {
                         project.projectLocation = {
@@ -179,14 +175,15 @@ var ProjectsLoader = /** @class */ (function () {
                 console.log("ProjectsLoader: done calculating locations for " + _this.projects.length + " project");
                 //console.log(JSON.stringify(this.projects));
             }
-            else if (p == Math.ceil(_this.projects.length * 0.5) || p == Math.ceil(_this.projects.length * 0.2) || p == Math.ceil(_this.projects.length * 0.9) || p == Math.ceil(_this.projects.length * 0.7) || p == Math.ceil(_this.projects.length * 0.1)) {
+            else if (p == Math.ceil(_this.projects.length * 0.5) || p == Math.ceil(_this.projects.length * 0.2)
+                || p == Math.ceil(_this.projects.length * 0.9) || p == Math.ceil(_this.projects.length * 0.7)
+                || p == Math.ceil(_this.projects.length * 0.1)) {
                 console.log("ProjectsLoader: calculated: " + p);
             }
         }); // end of projects array  
     };
     // get all projects from the object
     ProjectsLoader.prototype.getAllProjects = function () {
-        //console.log(`ProjectLoader: requested to get projects ${JSON.stringify(this.projects)}`);
         return this.projects;
     };
     ProjectsLoader.prototype.reloadProjects = function () {
