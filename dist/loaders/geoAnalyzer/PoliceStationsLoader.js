@@ -48,9 +48,16 @@ var PoliceStationsLoader = /** @class */ (function () {
     //     return result;
     // }
     PoliceStationsLoader.prototype.reload = function () {
+        var _this = this;
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPoliceStations, 86400000);
+        setInterval(function () {
+            var hour = new Date().getHours();
+            if (hour == 1) {
+                Debug_1.default.msg('info', 'PoliceStationsLoader', 'started to reload as per the time interval');
+                _this.loadPoliceStations();
+            }
+        }, 3600000);
     };
     return PoliceStationsLoader;
 }());

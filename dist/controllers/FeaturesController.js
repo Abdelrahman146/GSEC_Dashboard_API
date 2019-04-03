@@ -46,6 +46,7 @@ var PolygonsLoader_1 = __importDefault(require("../loaders/features/PolygonsLoad
 var FeaturesController = /** @class */ (function () {
     function FeaturesController() {
         console.log("FeaturesController: has started");
+        Debug_1.default.msg('info', 'FeaturesController', 'instance has started');
     }
     // reload points object
     FeaturesController.prototype.loadPoints = function (req, res) {
@@ -66,6 +67,7 @@ var FeaturesController = /** @class */ (function () {
                         err_1 = _a.sent();
                         res.send("FeaturesController: an error occured: " + err_1);
                         console.log("FeaturesController: an error occured: " + err_1);
+                        Debug_1.default.msg('error', 'FeaturesController', "" + err_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -91,6 +93,7 @@ var FeaturesController = /** @class */ (function () {
                         err_2 = _a.sent();
                         res.send("FeaturesController: an error occured: " + err_2);
                         console.log("FeaturesController: an error occured: " + err_2);
+                        Debug_1.default.msg('error', 'FeaturesController', "" + err_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -116,6 +119,7 @@ var FeaturesController = /** @class */ (function () {
                         err_3 = _a.sent();
                         res.send("FeaturesController: an error occured: " + err_3);
                         console.log("FeaturesController: an error occured: " + err_3);
+                        Debug_1.default.msg('error', 'FeaturesController', "" + err_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -133,6 +137,7 @@ var FeaturesController = /** @class */ (function () {
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);
             console.log("FeaturesController: an error occured: " + err);
+            Debug_1.default.msg('error', 'FeaturesController', "" + err);
         }
     };
     // get lines object
@@ -146,6 +151,7 @@ var FeaturesController = /** @class */ (function () {
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);
             console.log("FeaturesController: an error occured: " + err);
+            Debug_1.default.msg('error', 'FeaturesController', "" + err);
         }
     };
     // get polygons object
@@ -159,6 +165,7 @@ var FeaturesController = /** @class */ (function () {
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);
             console.log("FeaturesController: an error occured: " + err);
+            Debug_1.default.msg('error', 'FeaturesController', "" + err);
         }
     };
     return FeaturesController;

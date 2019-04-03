@@ -45,9 +45,16 @@ var HospitalsLoader = /** @class */ (function () {
         return result;
     };
     HospitalsLoader.prototype.reload = function () {
+        var _this = this;
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadHospitals, 86400000);
+        setInterval(function () {
+            var hour = new Date().getHours();
+            if (hour == 1) {
+                Debug_1.default.msg('info', 'HospitalsLoader', 'started to reload as per the time interval');
+                _this.loadHospitals();
+            }
+        }, 3600000);
     };
     return HospitalsLoader;
 }());

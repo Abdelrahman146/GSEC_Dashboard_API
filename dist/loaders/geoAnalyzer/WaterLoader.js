@@ -48,9 +48,17 @@ var WaterLoader = /** @class */ (function () {
     //     return result;
     // }
     WaterLoader.prototype.reload = function () {
+        var _this = this;
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadWater, 86400000);
+        // each hour: 3600000 millie seconds
+        setInterval(function () {
+            var hour = new Date().getHours();
+            if (hour == 1) {
+                Debug_1.default.msg('info', 'WaterLoader', 'started to reload as per the time interval');
+                _this.loadWater();
+            }
+        }, 3600000);
     };
     return WaterLoader;
 }());

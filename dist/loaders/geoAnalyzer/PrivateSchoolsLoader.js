@@ -48,9 +48,16 @@ var PrivateSchoolsLoader = /** @class */ (function () {
     //     return result;
     // }
     PrivateSchoolsLoader.prototype.reload = function () {
+        var _this = this;
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPrivateSchools, 86400000);
+        setInterval(function () {
+            var hour = new Date().getHours();
+            if (hour == 1) {
+                Debug_1.default.msg('info', 'PrivateSchoolsLoader', 'started to reload as per the time interval');
+                _this.loadPrivateSchools();
+            }
+        }, 3600000);
     };
     return PrivateSchoolsLoader;
 }());

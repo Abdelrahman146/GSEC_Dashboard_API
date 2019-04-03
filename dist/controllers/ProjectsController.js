@@ -44,6 +44,7 @@ var ProjectsLoader_1 = __importDefault(require("../loaders/ProjectsLoader"));
 var ProjectsController = /** @class */ (function () {
     function ProjectsController() {
         console.log("ProjectsController: has started");
+        Debug_1.default.msg('info', 'ProjectsController', 'instance has started');
     }
     // load all projects
     ProjectsController.prototype.loadProjects = function (req, res) {

@@ -14,7 +14,7 @@ var Routes = /** @class */ (function () {
         this.featuresController = new FeaturesController_1.default();
         this.geoAnalyzerController = new GeoAnalyzerController_1.default();
         console.log("Routes has started");
-        Debug_1.default.msg('info', 'Routes', "Routes has started");
+        Debug_1.default.msg('info', 'Routes', "instance has started");
     }
     Routes.prototype.routes = function (app) {
         // ===================== Debug [GET] =====================
