@@ -1,5 +1,4 @@
 "use strict";
-// /src/controllers/geoAnalyzer/FeaturesController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -39,6 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// /src/controllers/geoAnalyzer/FeaturesController.ts
+var Debug_1 = __importDefault(require("../loaders/Debug"));
 var PointsLoader_1 = __importDefault(require("../loaders/features/PointsLoader"));
 var LinesLoader_1 = __importDefault(require("../loaders/features/LinesLoader"));
 var PolygonsLoader_1 = __importDefault(require("../loaders/features/PolygonsLoader"));
@@ -59,6 +60,7 @@ var FeaturesController = /** @class */ (function () {
                         _a.sent();
                         res.send("FeaturesController: pointsObject has reloaded");
                         console.log("FeaturesController: pointsObject has reloaded");
+                        Debug_1.default.msg('info', 'FeaturesController', "pointsObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_1 = _a.sent();
@@ -83,6 +85,7 @@ var FeaturesController = /** @class */ (function () {
                         _a.sent();
                         res.send("FeaturesController: LinesObject has reloaded");
                         console.log("FeaturesController: LinesObject has reloaded");
+                        Debug_1.default.msg('info', 'FeaturesController', "LinesObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_2 = _a.sent();
@@ -107,6 +110,7 @@ var FeaturesController = /** @class */ (function () {
                         _a.sent();
                         res.send("FeaturesController: polygonsObject has reloaded");
                         console.log("FeaturesController: polygonsObject has reloaded");
+                        Debug_1.default.msg('info', 'FeaturesController', "polygonsObject has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_3 = _a.sent();
@@ -124,6 +128,7 @@ var FeaturesController = /** @class */ (function () {
             var pointsObject = PointsLoader_1.default.getAllPoints();
             res.send(pointsObject);
             console.log("FeaturesController: points object sent");
+            Debug_1.default.msg('info', 'FeaturesController', "points object sent");
         }
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);
@@ -136,6 +141,7 @@ var FeaturesController = /** @class */ (function () {
             var linesObject = LinesLoader_1.default.getAllLines();
             res.send(linesObject);
             console.log("FeaturesController: lines object sent");
+            Debug_1.default.msg('info', 'FeaturesController', "lines object sent");
         }
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);
@@ -148,6 +154,7 @@ var FeaturesController = /** @class */ (function () {
             var polygonsObject = PolygonsLoader_1.default.getAllPolygons();
             res.send(polygonsObject);
             console.log("FeaturesController: polygon object sent");
+            Debug_1.default.msg('info', 'FeaturesController', "polygon object sent");
         }
         catch (err) {
             res.send("FeaturesController: an error occured: " + err);

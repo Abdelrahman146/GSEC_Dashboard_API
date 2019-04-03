@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/HospitalsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var HospitalsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var HospitalsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.hospitals = results.features;
             console.log("HospitalsLoader: hospital object is loaded");
+            Debug_1.default.msg('info', 'HospitalsLoader', "hospital object is loaded");
         }).catch(function (err) {
             console.error("HospitalsLoader: error: " + err);
+            Debug_1.default.msg('error', 'HospitalsLoader', "" + err);
         });
     };
     HospitalsLoader.prototype.getAllHospitals = function () {

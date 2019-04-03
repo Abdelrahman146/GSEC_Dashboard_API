@@ -1,5 +1,5 @@
 // /src/app.ts
-
+import log from './loaders/Debug';
 import express from 'express';
 import bodyParser from 'body-parser';
 import {Routes} from "./routes";

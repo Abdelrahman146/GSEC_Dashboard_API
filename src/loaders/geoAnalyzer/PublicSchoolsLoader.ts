@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/PublicSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -26,8 +27,10 @@ class PublicSchoolsLoader {
         .then((results: any) => {
             this.publicSchools = results.features;
             console.log(`PublicSchoolsLoader: successfully retrieved ${this.publicSchools.length} schools`);
+            log.msg('info', 'PublicSchoolsLoader', `retrieved ${this.publicSchools.length} schools`);
         }).catch((err) => {
-            console.error(`PublicSchoolsLoader: error: ${err}`)
+            console.error(`PublicSchoolsLoader: error: ${err}`);
+            log.msg('error', 'PublicSchoolsLoader', `${err}`);
         });
     }
 
@@ -50,7 +53,13 @@ class PublicSchoolsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPublicSchools, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'PublicSchoolsLoader', 'started to reload as per the time interval');
+                this.loadPublicSchools();
+            }
+        }, 3600000);
     }
 
 }

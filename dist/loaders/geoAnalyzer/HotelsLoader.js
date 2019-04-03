@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/HotelsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var HotelsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var HotelsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.hotels = results.features;
             console.log("HotelsLoader: successfully retrieved " + _this.hotels.length + " hotel");
+            Debug_1.default.msg('info', 'HotelsLoader', "retrieved " + _this.hotels.length + " hotel");
         }).catch(function (err) {
             console.error("error: " + err);
+            Debug_1.default.msg('error', 'HotelsLoader', "" + err);
         });
     };
     // get all hotels from hotels object

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/WaterLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var WaterLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var WaterLoader = /** @class */ (function () {
             .then(function (results) {
             _this.waterConsumption = results.features;
             console.log("WaterConsumptionLoader: successfully retrieved " + _this.waterConsumption.length + " object");
+            Debug_1.default.msg('info', 'WaterConsumptionLoader', "retrieved " + _this.waterConsumption.length + " object");
         }).catch(function (err) {
             console.error("error: " + err);
+            Debug_1.default.msg('error', 'WaterConsumptionLoader', "" + err);
         });
     };
     // get all waterConsumption from waterConsumption object

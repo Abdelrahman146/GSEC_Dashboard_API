@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/DemographicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var DemographicsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var DemographicsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.demographics = results.features;
             console.log("DemographicsLoader: retreived " + _this.demographics.length + " object");
+            Debug_1.default.msg('info', 'DemographicsLoader', "retreived " + _this.demographics.length + " object");
         }).catch(function (err) {
             console.error("DemographicsLoader: error: " + err);
+            Debug_1.default.msg('error', 'DemographicsLoader', "" + err);
         });
     };
     // get all demographics from demographics object

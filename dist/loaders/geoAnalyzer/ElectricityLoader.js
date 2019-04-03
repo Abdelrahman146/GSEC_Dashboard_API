@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/ElectricityLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var ElectricityLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var ElectricityLoader = /** @class */ (function () {
             .then(function (results) {
             _this.electricityConsumption = results.features;
             console.log("ElectricityLoader: retrieved " + _this.electricityConsumption.length + " object");
+            Debug_1.default.msg('info', 'ElectricityLoader', "retrieved " + _this.electricityConsumption.length + " object");
         }).catch(function (err) {
             console.error("ElectricityLoader: error: " + err);
+            Debug_1.default.msg('error', 'ElectricityLoader', "" + err);
         });
     };
     ElectricityLoader.prototype.getElectricityObject = function () {

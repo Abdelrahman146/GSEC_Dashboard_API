@@ -1,6 +1,7 @@
 // /src/loaders/features/LinesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -27,7 +28,8 @@ class LinesLoader {
             this.lines = results.features;
             console.log(`LinesLoader: successfully retrieved ${this.lines.length} objects`);
         }).catch((err) => {
-            console.error(`LinesLoader: error: ${err}`)
+            console.error(`LinesLoader: error: ${err}`);
+            log.msg('error', 'LinesLoader', `${err}`);
         });
     }
 
@@ -39,7 +41,13 @@ class LinesLoader {
     private reloadLines(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadLines, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'LinesLoader', 'Projects has started to reload as per the time interval');
+                this.loadLines();
+            }
+        }, 3600000);
     }
 
 }

@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/WaterLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -26,8 +27,10 @@ class WaterLoader {
         .then((results: any) => {
             this.waterConsumption = results.features;
             console.log(`WaterConsumptionLoader: successfully retrieved ${this.waterConsumption.length} object`);
+            log.msg('info', 'WaterConsumptionLoader', `retrieved ${this.waterConsumption.length} object`);
         }).catch((err) => {
-            console.error(`error: ${err}`)
+            console.error(`error: ${err}`);
+            log.msg('error', 'WaterConsumptionLoader', `${err}`);
         });
     }
 
@@ -50,7 +53,14 @@ class WaterLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadWater, 86400000);
+        // each hour: 3600000 millie seconds
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'WaterLoader', 'started to reload as per the time interval');
+                this.loadWater();
+            }
+        }, 3600000);
     }
 
 }

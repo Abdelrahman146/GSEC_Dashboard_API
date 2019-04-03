@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 var configuration_1 = __importDefault(require("../../configuration"));
+var Debug_1 = __importDefault(require("../Debug"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var AmbulanceStationsLoader = /** @class */ (function () {
     function AmbulanceStationsLoader() {
@@ -26,8 +27,10 @@ var AmbulanceStationsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.ambulanceStations = results.features;
             console.log("AmbulanceStationsLoader: successfully retrieved " + _this.ambulanceStations.length + " objects");
+            Debug_1.default.msg('info', 'AmbulanceStationsLoader', "retrieved " + _this.ambulanceStations.length + " objects");
         }).catch(function (err) {
             console.error("AmbulanceStationsLoader: error: " + err);
+            Debug_1.default.msg('error', 'AmbulanceStationsLoader', "" + err);
         });
     };
     AmbulanceStationsLoader.prototype.getAllAmbulanceStations = function () {

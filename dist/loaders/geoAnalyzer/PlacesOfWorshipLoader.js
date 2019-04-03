@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/PlacesOfWorshipLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PlacesOfWorshipLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var PlacesOfWorshipLoader = /** @class */ (function () {
             .then(function (results) {
             _this.placesOfWorship = results.features;
             console.log("placesOfWorshipLoader: successfully retrieved " + _this.placesOfWorship.length + " placesOfWorship");
+            Debug_1.default.msg('info', 'placesOfWorshipLoader', "retrieved " + _this.placesOfWorship.length + " placesOfWorship");
         }).catch(function (err) {
             console.error("placesOfWorshipLoader: error: " + err);
+            Debug_1.default.msg('error', 'placesOfWorshipLoader', "" + err);
         });
     };
     PlacesOfWorshipLoader.prototype.getAllPlacesOfWorship = function () {

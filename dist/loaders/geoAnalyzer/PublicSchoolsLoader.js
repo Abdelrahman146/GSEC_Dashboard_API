@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/PublicSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PublicSchoolsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var PublicSchoolsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.publicSchools = results.features;
             console.log("PublicSchoolsLoader: successfully retrieved " + _this.publicSchools.length + " schools");
+            Debug_1.default.msg('info', 'PublicSchoolsLoader', "retrieved " + _this.publicSchools.length + " schools");
         }).catch(function (err) {
             console.error("PublicSchoolsLoader: error: " + err);
+            Debug_1.default.msg('error', 'PublicSchoolsLoader', "" + err);
         });
     };
     // get all publicSchools from publicSchools object

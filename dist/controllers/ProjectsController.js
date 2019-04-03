@@ -1,5 +1,4 @@
 "use strict";
-// /src/controllers/ProjectsController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -39,6 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// /src/controllers/ProjectsController.ts
+var Debug_1 = __importDefault(require("../loaders/Debug"));
 var ProjectsLoader_1 = __importDefault(require("../loaders/ProjectsLoader"));
 var ProjectsController = /** @class */ (function () {
     function ProjectsController() {
@@ -57,11 +58,13 @@ var ProjectsController = /** @class */ (function () {
                         _a.sent();
                         res.send("ProjectsController: projects has been loaded");
                         console.log("ProjectsController: projects has reloaded");
+                        Debug_1.default.msg('info', 'ProjectsController', "projects has reloaded");
                         return [3 /*break*/, 3];
                     case 2:
                         err_1 = _a.sent();
                         res.send("ProjectsController: an error occured: " + err_1);
                         console.log("ProjectsController: projects has reloaded");
+                        Debug_1.default.msg('error', 'ProjectsController', "" + err_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -74,10 +77,12 @@ var ProjectsController = /** @class */ (function () {
             var projects = ProjectsLoader_1.default.getAllProjects();
             res.json(projects);
             console.log("ProjectsController: projects sent");
+            Debug_1.default.msg('info', 'ProjectsController', "projects sent");
         }
         catch (err) {
             res.send("ProjectsController: an error occured: " + err);
             console.log("ProjectsController: an error occured: " + err);
+            Debug_1.default.msg('error', 'ProjectsController', "" + err);
         }
     };
     return ProjectsController;

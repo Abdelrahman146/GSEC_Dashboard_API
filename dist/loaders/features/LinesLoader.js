@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/features/LinesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var LinesLoader = /** @class */ (function () {
@@ -28,6 +29,7 @@ var LinesLoader = /** @class */ (function () {
             console.log("LinesLoader: successfully retrieved " + _this.lines.length + " objects");
         }).catch(function (err) {
             console.error("LinesLoader: error: " + err);
+            Debug_1.default.msg('error', 'LinesLoader', "" + err);
         });
     };
     // get all lines from lines object

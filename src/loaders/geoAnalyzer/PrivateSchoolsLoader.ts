@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/PrivateSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -27,8 +28,10 @@ class PrivateSchoolsLoader {
         .then((results: any) => {
             this.privateSchools = results.features;
             console.log(`PrivateSchoolsLoader: successfully retrieved ${this.privateSchools.length} schools`);
+            log.msg('info', 'PrivateSchoolsLoader', `retrieved ${this.privateSchools.length} schools`);
         }).catch((err) => {
             console.error(`PrivateSchoolsLoader: error: ${err}`);
+            log.msg('error', 'PrivateSchoolsLoader', `${err}`);
         });
     }
 
@@ -51,7 +54,13 @@ class PrivateSchoolsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPrivateSchools, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'PrivateSchoolsLoader', 'started to reload as per the time interval');
+                this.loadPrivateSchools();
+            }
+        }, 3600000);
     }
 
 }

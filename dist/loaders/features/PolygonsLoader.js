@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/features/PolygonsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PolygonsLoader = /** @class */ (function () {
@@ -27,8 +28,10 @@ var PolygonsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.polygons = results.features;
             console.log("PolygonsLoader: successfully retrieved " + _this.polygons.length + " objects");
+            Debug_1.default.msg('info', 'PolygonsLoader', "retrieved " + _this.polygons.length + " objects");
         }).catch(function (err) {
             console.error("polygonsLoader: error: " + err);
+            Debug_1.default.msg('error', 'polygonsLoader', "" + err);
         });
     };
     // get all polygons from polygons object

@@ -1,5 +1,5 @@
 // /src/controllers/ProjectsController.ts
-
+import log from '../loaders/Debug';
 import projectsLoader from '../loaders/ProjectsLoader';
 import { Request, Response } from 'express';
 
@@ -7,6 +7,7 @@ class ProjectsController {
 
     constructor() {
         console.log("ProjectsController: has started");
+        log.msg('info','ProjectsController', 'instance has started');
     }
 
     // load all projects
@@ -15,9 +16,11 @@ class ProjectsController {
             await projectsLoader.loadProjects();
             res.send("ProjectsController: projects has been loaded");
             console.log("ProjectsController: projects has reloaded");
+            log.msg('info', 'ProjectsController', `projects has reloaded`);
         }catch(err) {
             res.send(`ProjectsController: an error occured: ${err}`);
             console.log("ProjectsController: projects has reloaded");
+            log.msg('error', 'ProjectsController', `${err}`);
 
         }
     }
@@ -29,9 +32,11 @@ class ProjectsController {
             let projects: any = projectsLoader.getAllProjects();
             res.json(projects);
             console.log(`ProjectsController: projects sent`);
+            log.msg('info', 'ProjectsController', `projects sent`);
         }catch(err) {
             res.send(`ProjectsController: an error occured: ${err}`);
             console.log(`ProjectsController: an error occured: ${err}`);
+            log.msg('error', 'ProjectsController', `${err}`);
         }
     }
 

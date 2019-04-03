@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/HospitalsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -26,8 +27,10 @@ class HospitalsLoader {
         .then((results: any) => {
             this.hospitals = results.features;
             console.log(`HospitalsLoader: hospital object is loaded`)
+            log.msg('info', 'HospitalsLoader', `hospital object is loaded`);
         }).catch((err) => {
-            console.error(`HospitalsLoader: error: ${err}`)
+            console.error(`HospitalsLoader: error: ${err}`);
+            log.msg('error', 'HospitalsLoader', `${err}`);
         });
     }
     
@@ -49,7 +52,13 @@ class HospitalsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadHospitals, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'HospitalsLoader', 'started to reload as per the time interval');
+                this.loadHospitals();
+            }
+        }, 3600000);
     }
 
 }

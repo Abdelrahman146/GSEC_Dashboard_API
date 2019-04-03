@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/HousesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -25,9 +26,11 @@ class HousesLoader {
         })
         .then((results: any) => {
             this.houses = results.features;
-            console.log(`HousesLoader: successfully retrieved ${this.houses.length} houses`)
+            console.log(`HousesLoader: successfully retrieved ${this.houses.length} houses`);
+            log.msg('info', 'HousesLoader', `retrieved ${this.houses.length} houses`);
         }).catch((err) => {
-            console.error(`HousesLoader: ${err}`)
+            console.error(`HousesLoader: ${err}`);
+            log.msg('error', 'HousesLoader', `${err}`);
         });
     }
 
@@ -50,7 +53,13 @@ class HousesLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadHouses, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'HousesLoader', 'started to reload as per the time interval');
+                this.loadHouses();
+            }
+        }, 3600000);
     }
 
 }

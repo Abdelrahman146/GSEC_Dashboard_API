@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/CivilDefenceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -25,9 +26,11 @@ class CivilDefenceStationsLoader {
         })
         .then((results: any) => {
             this.civilDefenceStations = results.features;
-            console.log(`CivilDefenceStationsLoader: retreived ${this.civilDefenceStations.length} stations`)
+            console.log(`CivilDefenceStationsLoader: retreived ${this.civilDefenceStations.length} stations`);
+            log.msg('info', 'CivilDefenceStationsLoader', `CivilDefenceStationsLoader: retreived ${this.civilDefenceStations.length} stations`);
         }).catch((err) => {
             console.error(`error: ${err}`)
+            log.msg('error', 'CivilDefenceStationsLoader', `${err}`);
         });
     }
 
@@ -49,7 +52,13 @@ class CivilDefenceStationsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadCivilDefenceStations, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'CivilDefenceStationsLoader', 'started to reload as per the time interval');
+                this.loadCivilDefenceStations();
+            }
+        }, 3600000);
     }
 
 }

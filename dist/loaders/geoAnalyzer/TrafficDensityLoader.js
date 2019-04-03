@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/TrafficDensityAreasLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var TrafficDensityAreasLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var TrafficDensityAreasLoader = /** @class */ (function () {
             .then(function (results) {
             _this.trafficDensityAreas = results.features;
             console.log("TrafficDensityAreasLoader: successfully retrieved " + _this.trafficDensityAreas.length + " object");
+            Debug_1.default.msg('info', 'TrafficDensityAreasLoader', "retrieved " + _this.trafficDensityAreas.length + " object");
         }).catch(function (err) {
             console.error("TrafficDensityAreasLoader: error: " + err);
+            Debug_1.default.msg('error', 'TrafficDensityAreasLoader', "" + err);
         });
     };
     // get all trafficDensityAreas from trafficDensityAreas object

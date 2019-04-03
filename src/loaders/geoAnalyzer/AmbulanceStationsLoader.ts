@@ -2,6 +2,7 @@
 require("isomorphic-fetch");
 require("isomorphic-form-data");
 import urls from '../../configuration';
+import log from '../Debug';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
 class AmbulanceStationsLoader {
@@ -26,8 +27,10 @@ class AmbulanceStationsLoader {
         .then((results: any) => {
             this.ambulanceStations = results.features;
             console.log(`AmbulanceStationsLoader: successfully retrieved ${this.ambulanceStations.length} objects`);
+            log.msg('info', 'AmbulanceStationsLoader', `retrieved ${this.ambulanceStations.length} objects`);
         }).catch((err) => {
-            console.error(`AmbulanceStationsLoader: error: ${err}`)
+            console.error(`AmbulanceStationsLoader: error: ${err}`);
+            log.msg('error', 'AmbulanceStationsLoader', `${err}`);
         });
     }
 
@@ -49,7 +52,13 @@ class AmbulanceStationsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadAmbulanceStations, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'AmbulanceStationsLoader', 'started to reload as per the time interval');
+                this.loadAmbulanceStations();
+            }
+        }, 3600000);
     }
 
 }

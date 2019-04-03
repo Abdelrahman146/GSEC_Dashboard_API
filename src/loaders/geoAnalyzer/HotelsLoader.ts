@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/HotelsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -25,9 +26,11 @@ class HotelsLoader {
         })
         .then((results: any) => {
             this.hotels = results.features ;
-            console.log(`HotelsLoader: successfully retrieved ${this.hotels.length} hotel`)
+            console.log(`HotelsLoader: successfully retrieved ${this.hotels.length} hotel`);
+            log.msg('info', 'HotelsLoader', `retrieved ${this.hotels.length} hotel`);
         }).catch((err) => {
-            console.error(`error: ${err}`)
+            console.error(`error: ${err}`);
+            log.msg('error', 'HotelsLoader', `${err}`);
         });
     }
 
@@ -50,7 +53,13 @@ class HotelsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadHotels, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'HotelsLoader', 'started to reload as per the time interval');
+                this.loadHotels();
+            }
+        }, 3600000);
     }
 
 }

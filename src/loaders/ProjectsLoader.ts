@@ -1,10 +1,12 @@
 // /src/loaders/geoanalyzer/ProjectsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from './Debug';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 import urls from '../configuration';
 import rp from 'request-promise';
-
+import * as fs from 'fs';
+import * as path from 'path';
 class ProjectsLoader {
 
     private projects: any[];
@@ -21,6 +23,12 @@ class ProjectsLoader {
 
     constructor() {
         this.projects = [];
+        fs.readFile(path.join(__dirname, '../json/projects.json'), 'utf8', (error, data) => {
+            if (error) {log.msg('error','projects loader',error.message);}
+            else {
+                this.projects = JSON.parse(data);
+            }
+        })
         this.loadProjects();
         this.reloadProjects();
     }
@@ -29,15 +37,18 @@ class ProjectsLoader {
         let that = this
         rp(this.projectsUrl).then(function(p) {
             console.log(`ProjectsLoader: successfully retrieved ${p.data.length} projects`);
+            log.msg('info','ProjectsLoader',`retrieved ${p.data.length} projects`);
             that.loadFeatures(p.data);
         }).catch(function(err) {
             console.log(`ProjectsLoader: an error occured while retrieving the projects from API... ${err}`);
+            log.msg('error','ProjectsLoader',`an error occured while retrieving the projects from API... ${err}`);
         }); 
         
     }
 
     private loadFeatures(projects: any) {
         console.log('ProjectsLoader: started to load features...');
+        log.msg('info','ProjectsLoader','started to load features...');
         let i: number = 0;
         let p: number = 1;
         projects.forEach((project: any) => {
@@ -53,16 +64,18 @@ class ProjectsLoader {
                 i++;
                 p++;
                 if(p == projects.length) {
-                    this.projects = projects;
-                    console.log(`ProjectsLoader: done fetching ${i} features`)
-                    this.calculateMarkersLocation();
+                    console.log(`ProjectsLoader: done fetching ${i} features`);
+                    log.msg('info','ProjectsLoader',`done fetching ${i} features`);
+                    this.calculateMarkersLocation(projects);
                 }else if(p == Math.ceil(projects.length*0.5) || p == Math.ceil(projects.length*0.2) 
                 || p == Math.ceil(projects.length*0.9) || p == Math.ceil(projects.length*0.7) 
                 || p == Math.ceil(projects.length*0.1)){
                     console.log(`ProjectsLoader: fetched: ${p}`);
+                    log.msg('info','ProjectsLoader',`fetched: ${p}`);
                 }
             }).catch((err) => {
-                console.error(`ProjectsLoader: error: ${err}`)
+                console.error(`ProjectsLoader: error: ${err}`);
+                log.msg('error','ProjectsLoader',`${err}`);
             });
 
             // add lines
@@ -74,7 +87,8 @@ class ProjectsLoader {
                 project.features.lines = results.features;
                 i++;
             }).catch((err) => {
-                console.error(`ProjectsLoader: error: ${err}`)
+                console.error(`ProjectsLoader: error: ${err}`);
+                log.msg('error','ProjectsLoader',`${err}`);
             });
 
             // add points
@@ -86,15 +100,17 @@ class ProjectsLoader {
                 project.features.points = results.features;
                 i++;
             }).catch((err) => {
-                console.error(`ProjectsLoader: error: ${err}`)
+                console.error(`ProjectsLoader: error: ${err}`);
+                log.msg('error','ProjectsLoader',`${err}`);
             });
         });
     }
 
-    private calculateMarkersLocation() {
+    private calculateMarkersLocation(projects: any) {
         console.log(`ProjectsLoader: started calculating projects location`);
+        log.msg('info','ProjectsLoader',`started calculating projects location`);
         let p: number = 0;
-        this.projects.forEach((project: any) => {
+        projects.forEach((project: any) => {
             let xmax: number = 0;
             let ymax: number = 0;
             let xmin: number = 100000000000;
@@ -146,13 +162,22 @@ class ProjectsLoader {
                     }    
                 }
             }
-            if(p == this.projects.length){
-                console.log(`ProjectsLoader: done calculating locations for ${this.projects.length} project`);
+            if(p == projects.length){
+                console.log(`ProjectsLoader: done calculating locations for ${projects.length} project`);
+                log.msg('info','ProjectsLoader',`done calculating locations for ${projects.length} project`);
+                try{
+                    this.projects = projects;
+                    fs.writeFileSync(path.join(__dirname, '../json/projects.json'),JSON.stringify(this.projects));
+                    log.msg('info','ProjectsLoader', 'updated projects.json');
+                }catch(err) {
+                    log.msg('error','ProjectsLoader', `writing json file: ${err}`);
+                }
                 //console.log(JSON.stringify(this.projects));
-            }else if(p == Math.ceil(this.projects.length*0.5) || p == Math.ceil(this.projects.length*0.2) 
-            || p == Math.ceil(this.projects.length*0.9) || p == Math.ceil(this.projects.length*0.7) 
-            || p == Math.ceil(this.projects.length*0.1)){
+            }else if(p == Math.ceil(projects.length*0.5) || p == Math.ceil(projects.length*0.2) 
+            || p == Math.ceil(projects.length*0.9) || p == Math.ceil(projects.length*0.7) 
+            || p == Math.ceil(projects.length*0.1)){
                 console.log(`ProjectsLoader: calculated: ${p}`);
+                log.msg('info','ProjectsLoader',`calculated: ${p}`);
             }
         }); // end of projects array  
     }
@@ -165,7 +190,14 @@ class ProjectsLoader {
     private reloadProjects(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadProjects, 86400000);
+        // each hour: 3600000 millie seconds
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'ProjectsLoader', 'Projects has started to reload as per the time interval');
+                this.loadProjects();
+            }
+        }, 3600000);
     }
 
 }

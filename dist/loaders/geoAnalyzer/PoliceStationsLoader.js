@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/PoliceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PoliceStationsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var PoliceStationsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.policeStation = results.features;
             console.log("PoliceStationsLoader: successfully retrieved " + _this.policeStation.length + " stations");
+            Debug_1.default.msg('info', 'PoliceStationsLoader', "retrieved " + _this.policeStation.length + " stations");
         }).catch(function (err) {
             console.error("PoliceStationsLoader: error: " + err);
+            Debug_1.default.msg('error', 'PoliceStationsLoader', "" + err);
         });
     };
     // get all policeStation from policeStation object

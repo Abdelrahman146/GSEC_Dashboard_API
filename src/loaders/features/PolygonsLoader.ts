@@ -1,6 +1,7 @@
 // /src/loaders/features/PolygonsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -27,8 +28,10 @@ class PolygonsLoader {
         .then((results: any) => {
             this.polygons = results.features;
             console.log(`PolygonsLoader: successfully retrieved ${this.polygons.length} objects`);
+            log.msg('info', 'PolygonsLoader', `retrieved ${this.polygons.length} objects`);
         }).catch((err) => {
-            console.error(`polygonsLoader: error: ${err}`)
+            console.error(`polygonsLoader: error: ${err}`);
+            log.msg('error', 'polygonsLoader', `${err}`);
         });
     }
 
@@ -40,7 +43,13 @@ class PolygonsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPolygons, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'polygonsLoader', 'Projects has started to reload as per the time interval');
+                this.loadPolygons();
+            }
+        }, 3600000);
     }
 
 }

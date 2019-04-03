@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/PrivateSchoolsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PrivateSchoolsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var PrivateSchoolsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.privateSchools = results.features;
             console.log("PrivateSchoolsLoader: successfully retrieved " + _this.privateSchools.length + " schools");
+            Debug_1.default.msg('info', 'PrivateSchoolsLoader', "retrieved " + _this.privateSchools.length + " schools");
         }).catch(function (err) {
             console.error("PrivateSchoolsLoader: error: " + err);
+            Debug_1.default.msg('error', 'PrivateSchoolsLoader', "" + err);
         });
     };
     // get all privateSchools from privateSchools object

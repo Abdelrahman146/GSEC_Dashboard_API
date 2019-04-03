@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/ClinicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var ClinicsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var ClinicsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.clinics = results.features;
             console.log("ClinicsLoader: retreived " + _this.clinics.length + " clinics");
+            Debug_1.default.msg('info', 'ClinicsLoader', "retreived " + _this.clinics.length + " clinics");
         }).catch(function (err) {
             console.error("error: " + err);
+            Debug_1.default.msg('error', 'ClinicsLoader', "" + err);
         });
     };
     ClinicsLoader.prototype.getAllClinics = function () {

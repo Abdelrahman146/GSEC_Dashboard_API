@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/ElectricityLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -25,9 +26,11 @@ class ElectricityLoader {
         })
         .then((results: any) => {
             this.electricityConsumption = results.features;
-            console.log(`ElectricityLoader: retrieved ${this.electricityConsumption.length} object`)
+            console.log(`ElectricityLoader: retrieved ${this.electricityConsumption.length} object`);
+            log.msg('info', 'ElectricityLoader', `retrieved ${this.electricityConsumption.length} object`);
         }).catch((err) => {
-            console.error(`ElectricityLoader: error: ${err}`)
+            console.error(`ElectricityLoader: error: ${err}`);
+            log.msg('error', 'ElectricityLoader', `${err}`);
         });
     }
 
@@ -49,7 +52,13 @@ class ElectricityLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadElectricity, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'ElectricityLoader', 'started to reload as per the time interval');
+                this.loadElectricity();
+            }
+        }, 3600000);
     }
 
 }

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/CivilDefenceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var CivilDefenceStationsLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var CivilDefenceStationsLoader = /** @class */ (function () {
             .then(function (results) {
             _this.civilDefenceStations = results.features;
             console.log("CivilDefenceStationsLoader: retreived " + _this.civilDefenceStations.length + " stations");
+            Debug_1.default.msg('info', 'CivilDefenceStationsLoader', "CivilDefenceStationsLoader: retreived " + _this.civilDefenceStations.length + " stations");
         }).catch(function (err) {
             console.error("error: " + err);
+            Debug_1.default.msg('error', 'CivilDefenceStationsLoader', "" + err);
         });
     };
     CivilDefenceStationsLoader.prototype.getAllCivilDefenceStations = function () {

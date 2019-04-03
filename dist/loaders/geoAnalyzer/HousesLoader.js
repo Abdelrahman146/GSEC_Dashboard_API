@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/geoanalyzer/HousesLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var HousesLoader = /** @class */ (function () {
@@ -26,8 +27,10 @@ var HousesLoader = /** @class */ (function () {
             .then(function (results) {
             _this.houses = results.features;
             console.log("HousesLoader: successfully retrieved " + _this.houses.length + " houses");
+            Debug_1.default.msg('info', 'HousesLoader', "retrieved " + _this.houses.length + " houses");
         }).catch(function (err) {
             console.error("HousesLoader: " + err);
+            Debug_1.default.msg('error', 'HousesLoader', "" + err);
         });
     };
     // get all houses from houses object

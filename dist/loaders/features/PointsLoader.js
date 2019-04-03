@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/loaders/features/PointsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+var Debug_1 = __importDefault(require("../Debug"));
 var configuration_1 = __importDefault(require("../../configuration"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var PointsLoader = /** @class */ (function () {
@@ -28,6 +29,7 @@ var PointsLoader = /** @class */ (function () {
             console.log("PointsLoader: successfully retrieved " + _this.points.length + " objects");
         }).catch(function (err) {
             console.error("error: " + err);
+            Debug_1.default.msg('error', 'PointsLoader', "" + err);
         });
     };
     // get all points from points object

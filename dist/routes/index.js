@@ -1,9 +1,10 @@
 "use strict";
-// /src/routes/index.ts
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// /src/routes/index.ts
+var Debug_1 = __importDefault(require("../loaders/Debug"));
 var ProjectsController_1 = __importDefault(require("../controllers/ProjectsController"));
 var FeaturesController_1 = __importDefault(require("../controllers/FeaturesController"));
 var GeoAnalyzerController_1 = __importDefault(require("../controllers/GeoAnalyzerController"));
@@ -13,8 +14,19 @@ var Routes = /** @class */ (function () {
         this.featuresController = new FeaturesController_1.default();
         this.geoAnalyzerController = new GeoAnalyzerController_1.default();
         console.log("Routes has started");
+        Debug_1.default.msg('info', 'Routes', "Routes has started");
     }
     Routes.prototype.routes = function (app) {
+        // ===================== Debug [GET] =====================
+        app.route('/log').get(function (req, res) {
+            try {
+                res.json(Debug_1.default.getLog());
+                //console.log(log.getLog());
+            }
+            catch (err) {
+                res.send(err);
+            }
+        });
         // ===================== Projects [reload] =====================
         // reload projects object
         app.route('/projects/load').get(this.projectsController.loadProjects);
@@ -37,7 +49,7 @@ var Routes = /** @class */ (function () {
         app.route('/features/points').get(this.featuresController.getAllPoints);
         // ===================== geoanalyzer [reload] =====================
         // reload demographics object
-        app.route('/geoanalyzer/dempographics/load').get(this.geoAnalyzerController.loadDemographics);
+        app.route('/geoanalyzer/demographics/load').get(this.geoAnalyzerController.loadDemographics);
         // reload electricity object
         app.route('/geoanalyzer/electricity/load').get(this.geoAnalyzerController.loadElectricity);
         // reload water object
@@ -65,7 +77,7 @@ var Routes = /** @class */ (function () {
         // reload traffic density object
         app.route('/geoanalyzer/traffic/load').get(this.geoAnalyzerController.loadTraffic);
         // ===================== geoanalyzer [GET] =====================
-        app.route('/geoanalyzer/dempographics').get(this.geoAnalyzerController.getAllDemographics);
+        app.route('/geoanalyzer/demographics').get(this.geoAnalyzerController.getAllDemographics);
         // get total number of usual residents from demographic object
         // app.route('/geoanalyzer/dempographics/usualresident').get(this.geoAnalyzerController.getTotalUsualResidentsByGeometry);
         // // get total number of citizens from demographic object

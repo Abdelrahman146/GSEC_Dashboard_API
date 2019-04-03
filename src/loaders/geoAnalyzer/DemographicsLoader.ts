@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/DemographicsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -25,9 +26,11 @@ class DemographicsLoader {
         })
         .then((results: any) => {
             this.demographics = results.features;
-            console.log(`DemographicsLoader: retreived ${this.demographics.length} object`)
+            console.log(`DemographicsLoader: retreived ${this.demographics.length} object`);
+            log.msg('info', 'DemographicsLoader', `retreived ${this.demographics.length} object`);
         }).catch((err) => {
-            console.error(`DemographicsLoader: error: ${err}`)
+            console.error(`DemographicsLoader: error: ${err}`);
+            log.msg('error', 'DemographicsLoader', `${err}`);
         });
     }
 
@@ -94,7 +97,13 @@ class DemographicsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadDemographics, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'DemographicsLoader', 'started to reload as per the time interval');
+                this.loadDemographics();
+            }
+        }, 3600000);
     }
 
 }

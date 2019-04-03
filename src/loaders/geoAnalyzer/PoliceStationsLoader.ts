@@ -1,6 +1,7 @@
 // /src/loaders/geoanalyzer/PoliceStationsLoader.ts
 require("isomorphic-fetch");
 require("isomorphic-form-data");
+import log from '../Debug';
 import urls from '../../configuration';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 
@@ -26,8 +27,10 @@ class PoliceStationsLoader {
         .then((results: any) => {
             this.policeStation = results.features;
             console.log(`PoliceStationsLoader: successfully retrieved ${this.policeStation.length} stations`);
+            log.msg('info', 'PoliceStationsLoader', `retrieved ${this.policeStation.length} stations`);
         }).catch((err) => {
-            console.error(`PoliceStationsLoader: error: ${err}`)
+            console.error(`PoliceStationsLoader: error: ${err}`);
+            log.msg('error', 'PoliceStationsLoader', `${err}`);
         });
     }
 
@@ -50,7 +53,13 @@ class PoliceStationsLoader {
     private reload(): any {
         // each day: 86400000 millie seconds
         // each week: 604800000 millie seconds
-        setInterval(this.loadPoliceStations, 86400000);
+        setInterval(()=> {
+            let hour = new Date().getHours();
+            if (hour == 1) {
+                log.msg('info', 'PoliceStationsLoader', 'started to reload as per the time interval');
+                this.loadPoliceStations();
+            }
+        }, 3600000);
     }
 
 }

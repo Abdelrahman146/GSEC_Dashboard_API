@@ -1,5 +1,5 @@
 // /src/controllers/geoAnalyzer/GeoAnalyzerController.ts
-
+import log from '../loaders/Debug';
 import DemographicsLoader from '../loaders/geoAnalyzer/DemographicsLoader';
 import ElectricityLoader from '../loaders/geoAnalyzer/ElectricityLoader';
 import WaterLoader from '../loaders/geoAnalyzer/WaterLoader';
@@ -21,6 +21,7 @@ class GeoAnalyzerController {
 
     constructor() {
         console.log("GeoAnalyzerController: has started");
+        log.msg('info','GeoAnalyzerController', 'instance has started');
     }
 
     // reload Demographic object
@@ -29,9 +30,11 @@ class GeoAnalyzerController {
             await DemographicsLoader.loadDemographics();
             res.send("GeoAnalyzerController: Demographics has reloaded");
             console.log("GeoAnalyzerController: Demographics has reloaded");
+            log.msg('info','GeoAnalyzerController', ' Demographics has reloaded');
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -39,10 +42,12 @@ class GeoAnalyzerController {
         try {
             let result: any = DemographicsLoader.getAllDemographics();
             res.send(result);
-            console.log(`GeoAnalyzerController: demographics sent: ${result}`);
+            console.log(`GeoAnalyzerController: demographics sent:`);
+            log.msg('info','GeoAnalyzerController', `demographics sent:`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -115,6 +120,7 @@ class GeoAnalyzerController {
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -123,10 +129,13 @@ class GeoAnalyzerController {
         try {
             let result: any = WaterLoader.getWaterObject();
             res.send(result);
-            console.log(`GeoAnalyzerController: total water consumption sent`);
+            console.log(`GeoAnalyzerController: water consumption sent`);
+            log.msg('info','GeoAnalyzerController', `water consumption sent`);
+            log.msg('info','GeoAnalyzerController', `water consumption sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -136,9 +145,12 @@ class GeoAnalyzerController {
             await ElectricityLoader.loadElectricity();
             res.send("GeoAnalyzerController: Electricity has reloaded");
             console.log("GeoAnalyzerController: Electricity has reloaded");
+            log.msg('info','GeoAnalyzerController', `Electricity has reloaded`);
+            
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -147,10 +159,12 @@ class GeoAnalyzerController {
         try {
             let result: any = ElectricityLoader.getElectricityObject();
             res.send(result);
-            console.log(`GeoAnalyzerController: total electricity consumption sent`);
+            console.log(`GeoAnalyzerController: electricity consumption sent`);
+            log.msg('info','GeoAnalyzerController', `electricity consumption sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -160,9 +174,11 @@ class GeoAnalyzerController {
             await HospitalsLoader.loadHospitals();
             res.send("GeoAnalyzerController: Hospitals has reloaded");
             console.log("GeoAnalyzerController: Hospitals has reloaded");
+            log.msg('info','GeoAnalyzerController', `Hospitals has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -172,9 +188,11 @@ class GeoAnalyzerController {
             let result: any = HospitalsLoader.getAllHospitals();
             res.send(result);
             console.log(`GeoAnalyzerController: hospitals sent`);
+            log.msg('info','GeoAnalyzerController', `hospitals sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -184,9 +202,11 @@ class GeoAnalyzerController {
             await ClinicsLoader.loadClinics();
             res.send("GeoAnalyzerController: Clinics has reloaded");
             console.log("GeoAnalyzerController: Clinics has reloaded");
+            log.msg('info','GeoAnalyzerController', `Clinics has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -196,9 +216,11 @@ class GeoAnalyzerController {
             let result: any = ClinicsLoader.getAllClinics();
             res.send(result);
             console.log(`GeoAnalyzerController: clinics sent`);
+            log.msg('info','GeoAnalyzerController', `clinics sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -208,9 +230,11 @@ class GeoAnalyzerController {
             await PoliceStationsLoader.loadPoliceStations();
             res.send("GeoAnalyzerController: PoliceStations has reloaded");
             console.log("GeoAnalyzerController: PoliceStations has reloaded");
+            log.msg('info','GeoAnalyzerController', `PoliceStations has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -220,9 +244,11 @@ class GeoAnalyzerController {
             let result: any = PoliceStationsLoader.getAllPoliceStations();
             res.send(result);
             console.log(`GeoAnalyzerController: PoliceStations sent`);
+            log.msg('info','GeoAnalyzerController', `PoliceStations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: n error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
     
@@ -232,9 +258,11 @@ class GeoAnalyzerController {
             await CivilDefenceStationsLoader.loadCivilDefenceStations();
             res.send("GeoAnalyzerController: CivilDefence has reloaded");
             console.log("GeoAnalyzerController: CivilDefence has reloaded");
+            log.msg('info','GeoAnalyzerController', `CivilDefence has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -244,9 +272,11 @@ class GeoAnalyzerController {
             let result: any = CivilDefenceStationsLoader.getAllCivilDefenceStations();
             res.send(result);
             console.log(`GeoAnalyzerController: CivilDefence Stations sent`);
+            log.msg('info','GeoAnalyzerController', `CivilDefence Stations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -256,9 +286,11 @@ class GeoAnalyzerController {
             await AmbulanceStationsLoader.loadAmbulanceStations();
             res.send("GeoAnalyzerController: AmbulanceStations has reloaded");
             console.log("GeoAnalyzerController: AmbulanceStations has reloaded");
+            log.msg('info','GeoAnalyzerController', `AmbulanceStations has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController:  an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -268,9 +300,11 @@ class GeoAnalyzerController {
             let result: any = AmbulanceStationsLoader.getAllAmbulanceStations();
             res.send(result);
             console.log(`GeoAnalyzerController: Ambulance Stations sent`);
+            log.msg('info','GeoAnalyzerController', `Ambulance Stations sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -280,9 +314,11 @@ class GeoAnalyzerController {
             await PrivateSchoolsLoader.loadPrivateSchools();
             res.send("GeoAnalyzerController: PrivateSchools has reloaded");
             console.log("GeoAnalyzerController: PrivateSchools has reloaded");
+            log.msg('info','GeoAnalyzerController', `PrivateSchools has reloadedt`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -292,9 +328,11 @@ class GeoAnalyzerController {
             let result: any = PrivateSchoolsLoader.getAllPrivateSchools();
             res.send(result);
             console.log(`GeoAnalyzerController: PrivateSchools sent`);
+            log.msg('info','GeoAnalyzerController', `PrivateSchools sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -304,9 +342,11 @@ class GeoAnalyzerController {
             await PublicSchoolsLoader.loadPublicSchools();
             res.send("GeoAnalyzerController: PublicSchools has reloaded");
             console.log("GeoAnalyzerController: PublicSchools has reloaded");
+            log.msg('info','GeoAnalyzerController', `PublicSchools has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -316,9 +356,11 @@ class GeoAnalyzerController {
             let result: any = PublicSchoolsLoader.getAllPublicSchools();
             res.send(result);
             console.log(`GeoAnalyzerController: PublicSchools sent`);
+            log.msg('info','GeoAnalyzerController', `PublicSchools sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -328,9 +370,11 @@ class GeoAnalyzerController {
             await PlacesOfWorshipLoader.loadPlacesOfWorship();
             res.send("GeoAnalyzerController: PlacesOfWorship has reloaded");
             console.log("GeoAnalyzerController: PlacesOfWorship has reloaded");
+            log.msg('info','GeoAnalyzerController', `PlacesOfWorship has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -340,9 +384,11 @@ class GeoAnalyzerController {
             let result: any = PlacesOfWorshipLoader.getAllPlacesOfWorship();
             res.send(result);
             console.log(`GeoAnalyzerController: PlacesOfWorship sent`);
+            log.msg('info','GeoAnalyzerController', `PlacesOfWorship sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -352,9 +398,11 @@ class GeoAnalyzerController {
             await HotelsLoader.loadHotels();
             res.send("GeoAnalyzerController: Hotels has reloaded");
             console.log("GeoAnalyzerController: Hotels has reloaded");
+            log.msg('info','GeoAnalyzerController', `Hotels has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -364,9 +412,11 @@ class GeoAnalyzerController {
             let result: any = HotelsLoader.getAllHotels();
             res.send(result);
             console.log(`GeoAnalyzerController: Hotels sent`);
+            log.msg('info','GeoAnalyzerController', `Hotels sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -376,9 +426,11 @@ class GeoAnalyzerController {
             await HousesLoader.loadHouses();
             res.send("GeoAnalyzerController: Houses has reloaded");
             console.log("GeoAnalyzerController: Houses has reloaded");
+            log.msg('info','GeoAnalyzerController', `Houses has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -388,9 +440,11 @@ class GeoAnalyzerController {
             let result: any = HousesLoader.getAllHouses();
             res.send(result);
             console.log(`GeoAnalyzerController: Houses sent`);
+            log.msg('info','GeoAnalyzerController', `Houses sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 
@@ -400,9 +454,11 @@ class GeoAnalyzerController {
             await TrafficDensityLoader.loadTrafficDensityAreas();
             res.send("GeoAnalyzerController: Traffic has reloaded");
             console.log("GeoAnalyzerController: Traffic has reloaded");
+            log.msg('info','GeoAnalyzerController', `Traffic has reloaded`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }
     }
 
@@ -412,9 +468,11 @@ class GeoAnalyzerController {
             let result: any = TrafficDensityLoader.getAllTrafficDensityAreas();
             res.send(result);
             console.log(`GeoAnalyzerController: Traffic sent`);
+            log.msg('info','GeoAnalyzerController', `Traffic sent`);
         }catch(err) {
             res.send(`GeoAnalyzerController: an error occured: ${err}`);
             console.log(`GeoAnalyzerController: an error occured: ${err}`);
+            log.msg('error','GeoAnalyzerController', `${err}`);
         }        
     }
 

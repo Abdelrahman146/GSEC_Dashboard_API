@@ -1,9 +1,9 @@
 // /src/routes/index.ts
-
+import log from '../loaders/Debug';
 import ProjectsController from '../controllers/ProjectsController';
 import FeaturesController from '../controllers/FeaturesController';
 import GeoAnalyzerController from '../controllers/GeoAnalyzerController';
-
+import { Request, Response } from 'express';
 export class Routes {
 
     private projectsController: ProjectsController;
@@ -15,8 +15,19 @@ export class Routes {
         this.featuresController = new FeaturesController();
         this.geoAnalyzerController = new GeoAnalyzerController();
         console.log("Routes has started");
+        log.msg('info', 'Routes', `instance has started`);
     }
     public routes(app: any): void {
+        // ===================== Debug [GET] =====================
+        app.route('/log').get(function(req: Request, res: Response) {
+            try {
+                res.json(log.getLog());
+                //console.log(log.getLog());
+            } catch(err) {
+                res.send(err);
+            }
+        });
+
         // ===================== Projects [reload] =====================
         
         // reload projects object
@@ -48,7 +59,7 @@ export class Routes {
         // ===================== geoanalyzer [reload] =====================
 
         // reload demographics object
-        app.route('/geoanalyzer/dempographics/load').get(this.geoAnalyzerController.loadDemographics);
+        app.route('/geoanalyzer/demographics/load').get(this.geoAnalyzerController.loadDemographics);
         // reload electricity object
         app.route('/geoanalyzer/electricity/load').get(this.geoAnalyzerController.loadElectricity);
         // reload water object
@@ -78,7 +89,7 @@ export class Routes {
 
         // ===================== geoanalyzer [GET] =====================
 
-        app.route('/geoanalyzer/dempographics').get(this.geoAnalyzerController.getAllDemographics);
+        app.route('/geoanalyzer/demographics').get(this.geoAnalyzerController.getAllDemographics);
         // get total number of usual residents from demographic object
         // app.route('/geoanalyzer/dempographics/usualresident').get(this.geoAnalyzerController.getTotalUsualResidentsByGeometry);
         // // get total number of citizens from demographic object
