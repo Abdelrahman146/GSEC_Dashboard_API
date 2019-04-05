@@ -93,7 +93,7 @@ var DemographicsLoader = /** @class */ (function () {
         // each week: 604800000 millie seconds
         setInterval(function () {
             var hour = new Date().getHours();
-            if (hour == 1) {
+            if (hour == 8 || hour == 12) {
                 Debug_1.default.msg('info', 'DemographicsLoader', 'started to reload as per the time interval');
                 _this.loadDemographics();
             }

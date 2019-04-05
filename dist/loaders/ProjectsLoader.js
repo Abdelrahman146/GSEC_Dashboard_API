@@ -16,15 +16,24 @@ require("isomorphic-form-data");
 var Debug_1 = __importDefault(require("./Debug"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var configuration_1 = __importDefault(require("../configuration"));
-var request_promise_1 = __importDefault(require("request-promise"));
+var request_1 = __importDefault(require("request"));
 var fs = __importStar(require("fs"));
 var path = __importStar(require("path"));
 var ProjectsLoader = /** @class */ (function () {
     function ProjectsLoader() {
         var _this = this;
+        this.username = 'ecouncil\\gisadminprd';
+        this.password = 'sWU-re3r4Wru&ax';
         this.projectsUrl = {
-            uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
-            //uri: urls.PROJECTS_API_DASHBOARD_PRO,
+            //uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
+            url: configuration_1.default.PROJECTS_API_DASHBOARD_PRO,
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(this.username + ':' + this.password).toString('base64'),
+            },
+            // auth: {
+            //     user: this.username,
+            //     password: this.password
+            // },
             json: true
         };
         this.polygonsUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_POLY_PRO;
@@ -44,14 +53,23 @@ var ProjectsLoader = /** @class */ (function () {
     }
     ProjectsLoader.prototype.loadProjects = function () {
         var that = this;
-        request_promise_1.default(this.projectsUrl).then(function (p) {
-            console.log("ProjectsLoader: successfully retrieved " + p.data.length + " projects");
-            Debug_1.default.msg('info', 'ProjectsLoader', "retrieved " + p.data.length + " projects");
-            that.loadFeatures(p.data);
-        }).catch(function (err) {
-            console.log("ProjectsLoader: an error occured while retrieving the projects from API... " + err);
-            Debug_1.default.msg('error', 'ProjectsLoader', "an error occured while retrieving the projects from API... " + err);
+        request_1.default(this.projectsUrl, function (err, res, body) {
+            if (err) {
+                console.dir(err);
+                return;
+            }
+            console.log("headers " + JSON.stringify(res.headers));
+            console.dir('status code', res.statusCode);
+            console.dir(body);
         });
+        // rp(this.projectsUrl).then(function(p) {
+        //     console.log(`ProjectsLoader: successfully retrieved ${p.data.length} projects`);
+        //     log.msg('info','ProjectsLoader',`retrieved ${p.data.length} projects`);
+        //     that.loadFeatures(p.data);
+        // }).catch(function(err) {
+        //     console.log(`ProjectsLoader: an error occured while retrieving the projects from API... ${err.message}`);
+        //     log.msg('error','ProjectsLoader',`an error occured while retrieving the projects from API... ${err.message}`);
+        // }); 
     };
     ProjectsLoader.prototype.loadFeatures = function (projects) {
         var _this = this;
@@ -230,7 +248,7 @@ var ProjectsLoader = /** @class */ (function () {
         // each hour: 3600000 millie seconds
         setInterval(function () {
             var hour = new Date().getHours();
-            if (hour == 1) {
+            if (hour == 8 || hour == 12) {
                 Debug_1.default.msg('info', 'ProjectsLoader', 'Projects has started to reload as per the time interval');
                 _this.loadProjects();
             }

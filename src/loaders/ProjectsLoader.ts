@@ -4,16 +4,18 @@ require("isomorphic-form-data");
 import log from './Debug';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 import urls from '../configuration';
-import rp from 'request-promise';
+import * as Request from 'request-ntlm-promise';
 import * as fs from 'fs';
 import * as path from 'path';
 class ProjectsLoader {
 
     private projects: any[];
-    private projectsUrl= {
-        uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
-        //uri: urls.PROJECTS_API_DASHBOARD_PRO,
-        json: true
+    private projectsUrlOptions= {
+        //uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
+        url: urls.PROJECTS_API_DASHBOARD_PRO,
+        ntlm_domain: 'ecouncil',
+        username: 'edic1',
+        password: 'P@ssw0rd',
     };
     private polygonsUrl: string = urls.PROJECTS_MAP_DASHBOARD_POLY_PRO;
     private linesUrl: string = urls.PROJECTS_MAP_DASHBOARD_LINES_PRO;
@@ -34,16 +36,12 @@ class ProjectsLoader {
     }
 
     public loadProjects() {
-        let that = this
-        rp(this.projectsUrl).then(function(p) {
-            console.log(`ProjectsLoader: successfully retrieved ${p.data.length} projects`);
-            log.msg('info','ProjectsLoader',`retrieved ${p.data.length} projects`);
-            that.loadFeatures(p.data);
-        }).catch(function(err) {
-            console.log(`ProjectsLoader: an error occured while retrieving the projects from API... ${err}`);
-            log.msg('error','ProjectsLoader',`an error occured while retrieving the projects from API... ${err}`);
-        }); 
-        
+        Request.post(this.projectsUrlOptions, {}, (resp) => {
+            log.msg('info', 'ProjectsLoader', `${resp.statusCode} Retrieved ${resp.body.length} projects from API`);
+            this.loadFeatures(resp.body);
+        }).catch((err) => {
+            log.msg('error', 'ProjectsLoader', `${err}`);
+        });
     }
 
     private loadFeatures(projects: any) {
@@ -193,7 +191,7 @@ class ProjectsLoader {
         // each hour: 3600000 millie seconds
         setInterval(()=> {
             let hour = new Date().getHours();
-            if (hour == 1) {
+            if (hour == 8 || hour == 12) {
                 log.msg('info', 'ProjectsLoader', 'Projects has started to reload as per the time interval');
                 this.loadProjects();
             }

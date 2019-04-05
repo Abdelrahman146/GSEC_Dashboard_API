@@ -54,7 +54,7 @@ class ElectricityLoader {
         // each week: 604800000 millie seconds
         setInterval(()=> {
             let hour = new Date().getHours();
-            if (hour == 1) {
+            if (hour == 8 || hour == 12) {
                 log.msg('info', 'ElectricityLoader', 'started to reload as per the time interval');
                 this.loadElectricity();
             }

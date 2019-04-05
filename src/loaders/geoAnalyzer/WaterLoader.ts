@@ -56,7 +56,7 @@ class WaterLoader {
         // each hour: 3600000 millie seconds
         setInterval(()=> {
             let hour = new Date().getHours();
-            if (hour == 1) {
+            if (hour == 8 || hour == 12) {
                 log.msg('info', 'WaterLoader', 'started to reload as per the time interval');
                 this.loadWater();
             }
