@@ -16,25 +16,18 @@ require("isomorphic-form-data");
 var Debug_1 = __importDefault(require("./Debug"));
 var arcgis_rest_feature_service_1 = require("@esri/arcgis-rest-feature-service");
 var configuration_1 = __importDefault(require("../configuration"));
-var request_1 = __importDefault(require("request"));
+var Request = __importStar(require("request-ntlm-promise"));
 var fs = __importStar(require("fs"));
 var path = __importStar(require("path"));
 var ProjectsLoader = /** @class */ (function () {
     function ProjectsLoader() {
         var _this = this;
-        this.username = 'ecouncil\\gisadminprd';
-        this.password = 'sWU-re3r4Wru&ax';
-        this.projectsUrl = {
+        this.projectsUrlOptions = {
             //uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
             url: configuration_1.default.PROJECTS_API_DASHBOARD_PRO,
-            headers: {
-                'Authorization': 'Basic ' + Buffer.from(this.username + ':' + this.password).toString('base64'),
-            },
-            // auth: {
-            //     user: this.username,
-            //     password: this.password
-            // },
-            json: true
+            ntlm_domain: 'ecouncil',
+            username: 'edic1',
+            password: 'P@ssw0rd',
         };
         this.polygonsUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_POLY_PRO;
         this.linesUrl = configuration_1.default.PROJECTS_MAP_DASHBOARD_LINES_PRO;
@@ -52,24 +45,13 @@ var ProjectsLoader = /** @class */ (function () {
         this.reloadProjects();
     }
     ProjectsLoader.prototype.loadProjects = function () {
-        var that = this;
-        request_1.default(this.projectsUrl, function (err, res, body) {
-            if (err) {
-                console.dir(err);
-                return;
-            }
-            console.log("headers " + JSON.stringify(res.headers));
-            console.dir('status code', res.statusCode);
-            console.dir(body);
+        var _this = this;
+        Request.post(this.projectsUrlOptions, {}, function (resp) {
+            Debug_1.default.msg('info', 'ProjectsLoader', resp.statusCode + " Retrieved " + resp.body.length + " projects from API");
+            _this.loadFeatures(resp.body);
+        }).catch(function (err) {
+            Debug_1.default.msg('error', 'ProjectsLoader', "" + err);
         });
-        // rp(this.projectsUrl).then(function(p) {
-        //     console.log(`ProjectsLoader: successfully retrieved ${p.data.length} projects`);
-        //     log.msg('info','ProjectsLoader',`retrieved ${p.data.length} projects`);
-        //     that.loadFeatures(p.data);
-        // }).catch(function(err) {
-        //     console.log(`ProjectsLoader: an error occured while retrieving the projects from API... ${err.message}`);
-        //     log.msg('error','ProjectsLoader',`an error occured while retrieving the projects from API... ${err.message}`);
-        // }); 
     };
     ProjectsLoader.prototype.loadFeatures = function (projects) {
         var _this = this;

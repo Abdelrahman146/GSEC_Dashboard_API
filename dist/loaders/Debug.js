@@ -11,7 +11,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var time_stamp_1 = __importDefault(require("time-stamp"));
+var moment_1 = __importDefault(require("moment"));
 var fs = __importStar(require("fs"));
 var path = __importStar(require("path"));
 var Debug = /** @class */ (function () {
@@ -24,7 +24,8 @@ var Debug = /** @class */ (function () {
     }
     Debug.prototype.msg = function (logType, logSource, logMessage) {
         logType = logType.toUpperCase();
-        this.logArray.push(time_stamp_1.default('[YYYY-MM-DD] HH:mm:ss:') + " [" + logType + "] " + logSource + ": " + logMessage);
+        var currentTime = moment_1.default().format('YYYY-MM-DD HH:mm:ss');
+        this.logArray.push("[" + currentTime + "] [" + logType + "] " + logSource + ": " + logMessage);
     };
     Debug.prototype.getLog = function () {
         return this.logArray;
@@ -33,20 +34,25 @@ var Debug = /** @class */ (function () {
         var _this = this;
         setInterval(function () {
             var hour = new Date().getHours();
-            if (hour == 2) {
+            if (hour == 8 || hour == 126) {
                 try {
-                    var fn = "log_" + time_stamp_1.default('YYYY-MM-DD') + ".json";
+                    var currentTime = moment_1.default().format('YYYY-MM-DD');
+                    var fn = "log_" + currentTime + ".json";
+                    var logsDir = path.join(__dirname, "../logs");
+                    if (!fs.existsSync(logsDir)) {
+                        fs.mkdirSync(logsDir);
+                    }
                     var year = new Date().getFullYear();
-                    var yearDir = path.join(__dirname, "../logs/" + year);
+                    var yearDir = path.join(__dirname, "/logs/" + year);
                     if (!fs.existsSync(yearDir)) {
                         fs.mkdirSync(yearDir);
                     }
-                    var month = new Date().getMonth();
-                    var monthDir = path.join(__dirname, "../logs/" + year + "/" + month);
+                    var month = new Date().getMonth() + 1;
+                    var monthDir = path.join(__dirname, "/logs/" + year + "/" + month);
                     if (!fs.existsSync(monthDir)) {
                         fs.mkdirSync(monthDir);
                     }
-                    fs.writeFileSync(path.join(__dirname, "../logs/" + year + "/" + month + "/" + fn), JSON.stringify(_this.logArray));
+                    fs.writeFileSync(path.join(__dirname, "/logs/" + year + "/" + month + "/" + fn), JSON.stringify(_this.logArray));
                     _this.msg('info', 'log', "created " + fn);
                     _this.logArray = [];
                 }
