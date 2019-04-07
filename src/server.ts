@@ -2,7 +2,7 @@
 import log from './loaders/Debug';
 import app from './app';
 
-const port = process.env.PORT || 5437;
+const port = process.env.PORT;
 //const port = '';
 
 app.listen(port, function() {
