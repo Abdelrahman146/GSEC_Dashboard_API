@@ -19,7 +19,7 @@ export class Routes {
     }
     public routes(app: any): void {
         // ===================== Debug [GET] =====================
-        app.route('/log').get(function(req: Request, res: Response) {
+        app.route('/node/dashboardapi/log').get(function(req: Request, res: Response) {
             try {
                 res.json(log.getLog());
                 //console.log(log.getLog());
@@ -31,103 +31,103 @@ export class Routes {
         // ===================== Projects [reload] =====================
         
         // reload projects object
-        app.route('/projects/load').get(this.projectsController.loadProjects);
+        app.route('/node/dashboardapi/projects/load').get(this.projectsController.loadProjects);
 
         // ===================== Projects [GET] =====================
 
         // get all projects
-        app.route('/projects').get(this.projectsController.getAllProjects);
+        app.route('/node/dashboardapi/projects').get(this.projectsController.getAllProjects);
 
         // ===================== features [reload] =====================
 
         // reload polygons object
-        app.route('/features/polygons/load').get(this.featuresController.loadPolygons);
+        app.route('/node/dashboardapi/features/polygons/load').get(this.featuresController.loadPolygons);
         // reload lines object
-        app.route('/features/lines/load').get(this.featuresController.loadLines);
+        app.route('/node/dashboardapi/features/lines/load').get(this.featuresController.loadLines);
         // reload points object
-        app.route('/features/points/load').get(this.featuresController.loadPoints);
+        app.route('/node/dashboardapi/features/points/load').get(this.featuresController.loadPoints);
 
         // ===================== features [GET] =====================
 
         // reload polygons object
-        app.route('/features/polygons').get(this.featuresController.getAllPolygons);
+        app.route('/node/dashboardapi/features/polygons').get(this.featuresController.getAllPolygons);
         // reload lines object
-        app.route('/features/lines').get(this.featuresController.getAllLines);
+        app.route('/node/dashboardapi/features/lines').get(this.featuresController.getAllLines);
         // reload points object
-        app.route('/features/points').get(this.featuresController.getAllPoints);
+        app.route('/node/dashboardapi/features/points').get(this.featuresController.getAllPoints);
 
         // ===================== geoanalyzer [reload] =====================
 
         // reload demographics object
-        app.route('/geoanalyzer/demographics/load').get(this.geoAnalyzerController.loadDemographics);
+        app.route('/node/dashboardapi/geoanalyzer/demographics/load').get(this.geoAnalyzerController.loadDemographics);
         // reload electricity object
-        app.route('/geoanalyzer/electricity/load').get(this.geoAnalyzerController.loadElectricity);
+        app.route('/node/dashboardapi/geoanalyzer/electricity/load').get(this.geoAnalyzerController.loadElectricity);
         // reload water object
-        app.route('/geoanalyzer/water/load').get(this.geoAnalyzerController.loadWater);
+        app.route('/node/dashboardapi/geoanalyzer/water/load').get(this.geoAnalyzerController.loadWater);
         // reload hospitals object
-        app.route('/geoanalyzer/hospitals/load').get(this.geoAnalyzerController.loadHospitals);
+        app.route('/node/dashboardapi/geoanalyzer/hospitals/load').get(this.geoAnalyzerController.loadHospitals);
         // reload clinics object
-        app.route('/geoanalyzer/clinics/load').get(this.geoAnalyzerController.loadClinics);
+        app.route('/node/dashboardapi/geoanalyzer/clinics/load').get(this.geoAnalyzerController.loadClinics);
         // reload police stations object
-        app.route('/geoanalyzer/policestations/load').get(this.geoAnalyzerController.loadPoliceStations);
+        app.route('/node/dashboardapi/geoanalyzer/policestations/load').get(this.geoAnalyzerController.loadPoliceStations);
         // reload civil defence stations object
-        app.route('/geoanalyzer/civildefencestations/load').get(this.geoAnalyzerController.loadCivilDefenceStations);
+        app.route('/node/dashboardapi/geoanalyzer/civildefencestations/load').get(this.geoAnalyzerController.loadCivilDefenceStations);
         // reload ambulance stations object
-        app.route('/geoanalyzer/ambulancestations/load').get(this.geoAnalyzerController.loadAmbulanceStations);
+        app.route('/node/dashboardapi/geoanalyzer/ambulancestations/load').get(this.geoAnalyzerController.loadAmbulanceStations);
         // reload private schools object
-        app.route('/geoanalyzer/privateschools/load').get(this.geoAnalyzerController.loadPrivateSchools);
+        app.route('/node/dashboardapi/geoanalyzer/privateschools/load').get(this.geoAnalyzerController.loadPrivateSchools);
         // reload public schools object
-        app.route('/geoanalyzer/publicschools/load').get(this.geoAnalyzerController.loadPublicSchools);
+        app.route('/node/dashboardapi/geoanalyzer/publicschools/load').get(this.geoAnalyzerController.loadPublicSchools);
         // reload places of worship object
-        app.route('/geoanalyzer/placesofworship/load').get(this.geoAnalyzerController.loadPlacesOfWorship);
+        app.route('/node/dashboardapi/geoanalyzer/placesofworship/load').get(this.geoAnalyzerController.loadPlacesOfWorship);
         // reload hotels object
-        app.route('/geoanalyzer/hotels/load').get(this.geoAnalyzerController.loadHotels);
+        app.route('/node/dashboardapi/geoanalyzer/hotels/load').get(this.geoAnalyzerController.loadHotels);
         // reload houses object
-        app.route('/geoanalyzer/houses/load').get(this.geoAnalyzerController.loadHouses);
+        app.route('/node/dashboardapi/geoanalyzer/houses/load').get(this.geoAnalyzerController.loadHouses);
         // reload traffic density object
-        app.route('/geoanalyzer/traffic/load').get(this.geoAnalyzerController.loadTraffic);
+        app.route('/node/dashboardapi/geoanalyzer/traffic/load').get(this.geoAnalyzerController.loadTraffic);
 
         // ===================== geoanalyzer [GET] =====================
 
-        app.route('/geoanalyzer/demographics').get(this.geoAnalyzerController.getAllDemographics);
+        app.route('/node/dashboardapi/geoanalyzer/demographics').get(this.geoAnalyzerController.getAllDemographics);
         // get total number of usual residents from demographic object
-        // app.route('/geoanalyzer/dempographics/usualresident').get(this.geoAnalyzerController.getTotalUsualResidentsByGeometry);
+        // app.route('/node/dashboardapi/geoanalyzer/dempographics/usualresident').get(this.geoAnalyzerController.getTotalUsualResidentsByGeometry);
         // // get total number of citizens from demographic object
-        // app.route('/geoanalyzer/dempographics/citizens').get(this.geoAnalyzerController.getTotalCitizensByGeometry);
+        // app.route('/node/dashboardapi/geoanalyzer/dempographics/citizens').get(this.geoAnalyzerController.getTotalCitizensByGeometry);
         // // get total number of non-citizens from demographic object
-        // app.route('/geoanalyzer/dempographics/non-citizens').get(this.geoAnalyzerController.getTotalNonCitizensByGeometry);
+        // app.route('/node/dashboardapi/geoanalyzer/dempographics/non-citizens').get(this.geoAnalyzerController.getTotalNonCitizensByGeometry);
         // // get total number of male citizens from demographic object
-        // app.route('/geoanalyzer/dempographics/male-citizens').get(this.geoAnalyzerController.getTotalMaleCitizensByGeometry);
+        // app.route('/node/dashboardapi/geoanalyzer/dempographics/male-citizens').get(this.geoAnalyzerController.getTotalMaleCitizensByGeometry);
         // // get total number of female citizens from demographic object
-        // app.route('/geoanalyzer/dempographics/female-citizens').get(this.geoAnalyzerController.getTotalFemaleCitizensByGeometry);
+        // app.route('/node/dashboardapi/geoanalyzer/dempographics/female-citizens').get(this.geoAnalyzerController.getTotalFemaleCitizensByGeometry);
 
         // get total value of electrcity consumption
-        app.route('/geoanalyzer/electricity').get(this.geoAnalyzerController.getElectricityObject);
+        app.route('/node/dashboardapi/geoanalyzer/electricity').get(this.geoAnalyzerController.getElectricityObject);
         // get total value of water consumption
-        app.route('/geoanalyzer/water').get(this.geoAnalyzerController.getWaterObject);
+        app.route('/node/dashboardapi/geoanalyzer/water').get(this.geoAnalyzerController.getWaterObject);
 
         // get hospitals
-        app.route('/geoanalyzer/hospitals').get(this.geoAnalyzerController.getAllHospitals);
+        app.route('/node/dashboardapi/geoanalyzer/hospitals').get(this.geoAnalyzerController.getAllHospitals);
         // get clinics
-        app.route('/geoanalyzer/clinics').get(this.geoAnalyzerController.getAllClinics);
+        app.route('/node/dashboardapi/geoanalyzer/clinics').get(this.geoAnalyzerController.getAllClinics);
         // get police stations
-        app.route('/geoanalyzer/policestations').get(this.geoAnalyzerController.getAllPoliceStations);
+        app.route('/node/dashboardapi/geoanalyzer/policestations').get(this.geoAnalyzerController.getAllPoliceStations);
         // get civil defence stations
-        app.route('/geoanalyzer/civildefencestations').get(this.geoAnalyzerController.getAllCivilDefenceStations);
+        app.route('/node/dashboardapi/geoanalyzer/civildefencestations').get(this.geoAnalyzerController.getAllCivilDefenceStations);
         // get ambulance stations
-        app.route('/geoanalyzer/ambulancestations').get(this.geoAnalyzerController.getAllAmbulanceStations);
+        app.route('/node/dashboardapi/geoanalyzer/ambulancestations').get(this.geoAnalyzerController.getAllAmbulanceStations);
         // get private schools 
-        app.route('/geoanalyzer/privateschools').get(this.geoAnalyzerController.getAllPrivateSchools);
+        app.route('/node/dashboardapi/geoanalyzer/privateschools').get(this.geoAnalyzerController.getAllPrivateSchools);
         // get public schools 
-        app.route('/geoanalyzer/publicschools').get(this.geoAnalyzerController.getAllPublicSchools);
+        app.route('/node/dashboardapi/geoanalyzer/publicschools').get(this.geoAnalyzerController.getAllPublicSchools);
         // get places of worship
-        app.route('/geoanalyzer/placesofworship').get(this.geoAnalyzerController.getAllPlacesOfWorship);
+        app.route('/node/dashboardapi/geoanalyzer/placesofworship').get(this.geoAnalyzerController.getAllPlacesOfWorship);
         // get hotels 
-        app.route('/geoanalyzer/hotels').get(this.geoAnalyzerController.getAllHotels);
+        app.route('/node/dashboardapi/geoanalyzer/hotels').get(this.geoAnalyzerController.getAllHotels);
         // get houses 
-        app.route('/geoanalyzer/houses').get(this.geoAnalyzerController.getAllHouses);
+        app.route('/node/dashboardapi/geoanalyzer/houses').get(this.geoAnalyzerController.getAllHouses);
         // get traffic density 
-        app.route('/geoanalyzer/traffic').get(this.geoAnalyzerController.getAllTrafficDensityAreas);
+        app.route('/node/dashboardapi/geoanalyzer/traffic').get(this.geoAnalyzerController.getAllTrafficDensityAreas);
 
     }
 }
