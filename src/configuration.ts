@@ -1,4 +1,9 @@
+//============================== Credentials PRO =============================================
+const USERNAME = "gisadminprd";
+const PASSWORD = "sWU-re3r4Wru&ax";
+const DOMAIN = "ecouncil";
 
+//============================== Dashboard PRO =============================================
 const PROJECTS_API_DASHBOARD_PRO ="https://almeydan.ecouncil.ae/almeydanapi/api/dashboard";
 
 const PROJECTS_MAP_DASHBOARD_POLY_PRO ="https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/projects/FeatureServer/2";
@@ -21,7 +26,12 @@ const GEO_ANALYZER_HOTELS_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/servic
 const GEO_ANALYZER_HOUSES_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/geoanalyzer_map/MapServer/15" ;
 const HIGH_TRAFFIC_DENSITY_AREAS_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/geoanalyzer_map/MapServer/19" ;
 
+//============================== DO NOT CHANGE BELLOW =============================================
+
 export default {
+	USERNAME,
+	PASSWORD,
+	DOMAIN,
     PROJECTS_API_DASHBOARD_PRO,
     PROJECTS_MAP_DASHBOARD_POLY_PRO,
     PROJECTS_MAP_DASHBOARD_POINTS_PRO,

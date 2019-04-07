@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"EC-GIS-STG-10932-stderr-1554626382253.txt","computername":"EC-GIS-STG","pid":10932,"type":"stderr","created":1554626382253},{"file":"EC-GIS-STG-10932-stdout-1554626382239.txt","computername":"EC-GIS-STG","pid":10932,"type":"stdout","created":1554626382239},{"file":"EC-GIS-STG-11340-stderr-1554627532106.txt","computername":"EC-GIS-STG","pid":11340,"type":"stderr","created":1554627532106},{"file":"EC-GIS-STG-11340-stdout-1554627532096.txt","computername":"EC-GIS-STG","pid":11340,"type":"stdout","created":1554627532096},{"file":"EC-GIS-STG-13636-stderr-1554631132461.txt","computername":"EC-GIS-STG","pid":13636,"type":"stderr","created":1554631132461},{"file":"EC-GIS-STG-13636-stdout-1554631132446.txt","computername":"EC-GIS-STG","pid":13636,"type":"stdout","created":1554631132446},{"file":"EC-GIS-STG-4620-stderr-1554627242303.txt","computername":"EC-GIS-STG","pid":4620,"type":"stderr","created":1554627242303},{"file":"EC-GIS-STG-4620-stdout-1554627242288.txt","computername":"EC-GIS-STG","pid":4620,"type":"stdout","created":1554627242288},{"file":"EC-GIS-STG-4704-stderr-1554631027077.txt","computername":"EC-GIS-STG","pid":4704,"type":"stderr","created":1554631027077},{"file":"EC-GIS-STG-4704-stdout-1554631027062.txt","computername":"EC-GIS-STG","pid":4704,"type":"stdout","created":1554631027062},{"file":"EC-GIS-STG-5356-stderr-1554630222105.txt","computername":"EC-GIS-STG","pid":5356,"type":"stderr","created":1554630222105},{"file":"EC-GIS-STG-5356-stdout-1554630222089.txt","computername":"EC-GIS-STG","pid":5356,"type":"stdout","created":1554630222089},{"file":"EC-GIS-STG-7532-stderr-1554632176589.txt","computername":"EC-GIS-STG","pid":7532,"type":"stderr","created":1554632176589},{"file":"EC-GIS-STG-7532-stdout-1554632176574.txt","computername":"EC-GIS-STG","pid":7532,"type":"stdout","created":1554632176574},{"file":"EC-GIS-STG-7676-stderr-1554632438195.txt","computername":"EC-GIS-STG","pid":7676,"type":"stderr","created":1554632438195},{"file":"EC-GIS-STG-7676-stdout-1554632438182.txt","computername":"EC-GIS-STG","pid":7676,"type":"stdout","created":1554632438182},{"file":"EC-GIS-STG-8836-stderr-1554627329553.txt","computername":"EC-GIS-STG","pid":8836,"type":"stderr","created":1554627329553},{"file":"EC-GIS-STG-8836-stdout-1554627329539.txt","computername":"EC-GIS-STG","pid":8836,"type":"stdout","created":1554627329539},{"file":"EC-GIS-STG-9296-stderr-1554627486841.txt","computername":"EC-GIS-STG","pid":9296,"type":"stderr","created":1554627486841},{"file":"EC-GIS-STG-9296-stdout-1554627486828.txt","computername":"EC-GIS-STG","pid":9296,"type":"stdout","created":1554627486828},{"file":"EC-GIS-STG-9720-stderr-1554635483771.txt","computername":"EC-GIS-STG","pid":9720,"type":"stderr","created":1554635483771},{"file":"EC-GIS-STG-9720-stdout-1554635483755.txt","computername":"EC-GIS-STG","pid":9720,"type":"stdout","created":1554635483755}];
+        var lastUpdated = 1554635490437;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>

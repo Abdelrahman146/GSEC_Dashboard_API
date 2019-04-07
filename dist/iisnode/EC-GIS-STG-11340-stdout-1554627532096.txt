@@ -1,0 +1,49 @@
+started logging at /log
+ProjectsController: has started
+FeaturesController: has started
+GeoAnalyzerController: has started
+Routes has started
+GSEC dashboard API has started successfully at PORT: \\.\pipe\79bcdb04-f5a5-4204-a11f-559e57c9d2e6
+ProjectsController: projects sent
+HospitalsLoader: hospital object is loaded
+HotelsLoader: successfully retrieved 54 hotel
+PrivateSchoolsLoader: successfully retrieved 192 schools
+PoliceStationsLoader: successfully retrieved 28 stations
+PointsLoader: successfully retrieved 1191 objects
+WaterConsumptionLoader: successfully retrieved 1000 object
+ElectricityLoader: retrieved 1000 object
+CivilDefenceStationsLoader: retreived 38 stations
+AmbulanceStationsLoader: successfully retrieved 16 objects
+PublicSchoolsLoader: successfully retrieved 251 schools
+ClinicsLoader: retreived 295 clinics
+TrafficDensityAreasLoader: successfully retrieved 170 object
+placesOfWorshipLoader: successfully retrieved 1000 placesOfWorship
+LinesLoader: successfully retrieved 1705 objects
+ProjectsController: projects sent
+DemographicsLoader: retreived 1000 object
+PolygonsLoader: successfully retrieved 3127 objects
+HousesLoader: successfully retrieved 1000 houses
+ProjectsLoader: started to load features...
+ProjectsLoader: fetched: 93
+ProjectsLoader: fetched: 186
+ProjectsLoader: fetched: 465
+ProjectsLoader: fetched: 651
+ProjectsLoader: fetched: 837
+ProjectsLoader: done fetching 2784 features
+ProjectsLoader: started calculating projects location
+ProjectsLoader: calculated: 93
+ProjectsLoader: calculated: 186
+ProjectsLoader: calculated: 465
+ProjectsLoader: calculated: 651
+ProjectsLoader: calculated: 837
+ProjectsLoader: done calculating locations for 929 project
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent
+ProjectsController: projects sent

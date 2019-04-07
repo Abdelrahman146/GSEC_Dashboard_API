@@ -1,5 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//============================== Credentials PRO =============================================
+var USERNAME = "gisadminprd";
+var PASSWORD = "sWU-re3r4Wru&ax";
+var DOMAIN = "ecouncil";
+//============================== Dashboard PRO =============================================
 var PROJECTS_API_DASHBOARD_PRO = "https://almeydan.ecouncil.ae/almeydanapi/api/dashboard";
 var PROJECTS_MAP_DASHBOARD_POLY_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/projects/FeatureServer/2";
 var PROJECTS_MAP_DASHBOARD_POINTS_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/projects/FeatureServer/0";
@@ -19,7 +24,11 @@ var GEO_ANALYZER_PLACES_OF_WORSHIP_PRO = "https://almeydan.ecouncil.ae/arcgis/re
 var GEO_ANALYZER_HOTELS_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/geoanalyzer_map/MapServer/23";
 var GEO_ANALYZER_HOUSES_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/geoanalyzer_map/MapServer/15";
 var HIGH_TRAFFIC_DENSITY_AREAS_PRO = "https://almeydan.ecouncil.ae/arcgis/rest/services/gsec_application/geoanalyzer_map/MapServer/19";
+//============================== DO NOT CHANGE BELLOW =============================================
 exports.default = {
+    USERNAME: USERNAME,
+    PASSWORD: PASSWORD,
+    DOMAIN: DOMAIN,
     PROJECTS_API_DASHBOARD_PRO: PROJECTS_API_DASHBOARD_PRO,
     PROJECTS_MAP_DASHBOARD_POLY_PRO: PROJECTS_MAP_DASHBOARD_POLY_PRO,
     PROJECTS_MAP_DASHBOARD_POINTS_PRO: PROJECTS_MAP_DASHBOARD_POINTS_PRO,

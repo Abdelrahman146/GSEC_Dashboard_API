@@ -1,0 +1,39 @@
+started logging at /log
+ProjectsController: has started
+FeaturesController: has started
+GeoAnalyzerController: has started
+Routes has started
+GSEC dashboard API has started successfully at PORT: \\.\pipe\2ae9fe78-6cf8-4624-a453-0c1be2b2d4db
+AmbulanceStationsLoader: successfully retrieved 16 objects
+TrafficDensityAreasLoader: successfully retrieved 170 object
+HotelsLoader: successfully retrieved 54 hotel
+CivilDefenceStationsLoader: retreived 38 stations
+ClinicsLoader: retreived 295 clinics
+PointsLoader: successfully retrieved 1191 objects
+PublicSchoolsLoader: successfully retrieved 251 schools
+HospitalsLoader: hospital object is loaded
+PrivateSchoolsLoader: successfully retrieved 192 schools
+placesOfWorshipLoader: successfully retrieved 1000 placesOfWorship
+LinesLoader: successfully retrieved 1705 objects
+WaterConsumptionLoader: successfully retrieved 1000 object
+ElectricityLoader: retrieved 1000 object
+PoliceStationsLoader: successfully retrieved 28 stations
+DemographicsLoader: retreived 1000 object
+PolygonsLoader: successfully retrieved 3127 objects
+HousesLoader: successfully retrieved 1000 houses
+ProjectsLoader: started to load features...
+ProjectsLoader: fetched: 93
+ProjectsLoader: fetched: 186
+ProjectsLoader: fetched: 465
+ProjectsLoader: fetched: 651
+ProjectsLoader: fetched: 837
+ProjectsLoader: done fetching 2784 features
+ProjectsLoader: started calculating projects location
+ProjectsLoader: calculated: 93
+ProjectsLoader: calculated: 186
+ProjectsLoader: calculated: 465
+ProjectsLoader: calculated: 651
+ProjectsLoader: calculated: 837
+ProjectsLoader: done calculating locations for 929 project
+ProjectsController: projects sent
+ProjectsController: projects sent

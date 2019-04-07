@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // /src/server.ts
 var Debug_1 = __importDefault(require("./loaders/Debug"));
 var app_1 = __importDefault(require("./app"));
-var port = process.env.PORT || 5437;
+var port = process.env.PORT;
 //const port = '';
 app_1.default.listen(port, function () {
     console.log("GSEC dashboard API has started successfully at PORT: " + port);

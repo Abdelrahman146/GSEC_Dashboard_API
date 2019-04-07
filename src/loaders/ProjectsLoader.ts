@@ -4,18 +4,18 @@ require("isomorphic-form-data");
 import log from './Debug';
 import { queryFeatures  } from '@esri/arcgis-rest-feature-service';
 import urls from '../configuration';
-import * as Request from 'request-ntlm-promise';
+var ntlm = require('request-ntlm-continued');
 import * as fs from 'fs';
 import * as path from 'path';
 class ProjectsLoader {
 
     private projects: any[];
     private projectsUrlOptions= {
-        //uri: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
+        //url: 'http://geoespacial.idom.com:8080/idomdigital/gsec/response/projects.json',
         url: urls.PROJECTS_API_DASHBOARD_PRO,
-        ntlm_domain: 'ecouncil',
-        username: 'edic1',
-        password: 'P@ssw0rd',
+        ntlm_domain: urls.DOMAIN,
+        username: urls.USERNAME,
+        password: urls.PASSWORD,
     };
     private polygonsUrl: string = urls.PROJECTS_MAP_DASHBOARD_POLY_PRO;
     private linesUrl: string = urls.PROJECTS_MAP_DASHBOARD_LINES_PRO;
@@ -36,12 +36,13 @@ class ProjectsLoader {
     }
 
     public loadProjects() {
-        Request.post(this.projectsUrlOptions, {}, (resp) => {
-            log.msg('info', 'ProjectsLoader', `${resp.statusCode} Retrieved ${resp.body.length} projects from API`);
-            this.loadFeatures(resp.body);
-        }).catch((err) => {
-            log.msg('error', 'ProjectsLoader', `${err}`);
-        });
+		ntlm.post(this.projectsUrlOptions, {}, (err: any, response: any) => {
+			if(err) {log.msg('error', 'ProjectsLoader', `${err}`);}
+			else {
+				log.msg('info', 'ProjectsLoader', `${response.statusCode} Retrieved ${response.body.data.length} projects from API`);
+				this.loadFeatures(response.body.data);
+			}
+		});
     }
 
     private loadFeatures(projects: any) {
